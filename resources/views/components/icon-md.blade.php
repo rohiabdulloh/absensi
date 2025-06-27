@@ -1,0 +1,1 @@
+<div class="flex justify-center">@svg($name,'w-16 h-16 ')</div>
