@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Livewire\Pages\Worker;
+namespace App\Livewire\Pages\Student;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Illuminate\Database\Eloquent\Builder;
-use Livewire\Attributes\On; 
-use App\Models\Worker;
-    
-class WorkerTable extends DataTableComponent
+use Livewire\Attributes\On;
+use App\Models\Student;
+
+class StudentTable extends DataTableComponent
 {
-    protected $model = Worker::class;
+    protected $model = Student::class;
 
     public function configure(): void
     {
@@ -19,7 +19,6 @@ class WorkerTable extends DataTableComponent
         $this->setBulkActions([
             'deleteSelected' => 'Hapus',
         ]);
-
         $this->setBulkActionConfirms([ 'deleteSelected']);
         $this->setBulkActionConfirmMessage('deleteSelected', 'Apakah yakin akan menghapus data terpilih?');
         $this->setThAttributes(function(Column $column) {
@@ -29,23 +28,22 @@ class WorkerTable extends DataTableComponent
                 ];
             }
 
-            return [ 
+            return [
                 'default' => true,
                 'class' => 'dark:bg-gray-900 py-5',
             ];
-           
         });
     }
 
     public function builder(): Builder
     {
-        $workers =  Worker::query()->with('division','department','position','status');
-     
-        return $workers;
+        // Ambil data Student dengan relasi ke user
+        return Student::query()->with('user');
     }
 
     #[On('refresh')]
-    public function refresh(){
+    public function refresh()
+    {
         $this->dispatch('$refresh');
         $this->clearSelected();
     }
@@ -53,18 +51,13 @@ class WorkerTable extends DataTableComponent
     public function columns(): array
     { 
         return [
-            Column::make("No ID", "noid")->sortable()->searchable(),
-            Column::make("Nama Pekerja", "name")->sortable()->searchable(),
-            Column::make("NIK", "nik")->sortable()->searchable()->collapseOnMobile(),
-            Column::make("Tanggal Lahir", "dob")->sortable()->searchable()->collapseOnMobile(),
-            Column::make("Telepon", "telp")->sortable()->searchable()->collapseOnMobile(),
-            Column::make("Alamat", "address")->sortable()->searchable()->collapseOnMobile(),
-            Column::make("Departemen", "department.name")->sortable()->searchable()->collapseOnMobile(),
-            Column::make("Tanggal Masuk", "start_work_at")->sortable()->deselected()->collapseOnMobile(),
-            Column::make("No. Rekening", "bank_account")->sortable()->deselected()->collapseOnMobile(),
+            Column::make("NIS", "nis")->sortable()->searchable(),
+            Column::make("Nama", "name")->sortable()->searchable(),
+            Column::make("Jenis Kelamin", "gender")->sortable()->searchable(),
+            Column::make("Tahun Masuk", "year_entry")->sortable()->searchable()->collapseOnMobile(),
             Column::make("Dibuat", "created_at")->sortable()->deselected()->collapseOnMobile(),
             Column::make("Diedit", "updated_at")->sortable()->deselected()->collapseOnMobile(),
-            Column::make("Aksi", "id")->view('livewire.pages.worker.worker-action')->collapseOnMobile(),
+            Column::make("Aksi", "id")->view('livewire.pages.student.student-action')->collapseOnMobile(),
         ];
     }
 
@@ -72,9 +65,8 @@ class WorkerTable extends DataTableComponent
     {
         foreach($this->getSelected() as $item)
         { 
-           Worker::find($item)->delete();
+            Student::find($item)->delete();
         }
         $this->clearSelected();
     }
-
 }
