@@ -58,7 +58,7 @@ class PeriodPage extends Component
         $this->isEdit = false;
         $this->dispatch('refresh')->to(PeriodTable::class);
         $this->dispatch('close-modal');
-        $this->dispatch('show-message', msg: 'Data period berhasil disimpan');
+        $this->dispatch('show-message', msg: 'Data tahun ajaran berhasil disimpan');
         $this->resetForm();
     }
 
@@ -74,8 +74,22 @@ class PeriodPage extends Component
         if ($period) {
             $period->delete();
             $this->dispatch('refresh')->to(PeriodTable::class);
-            $this->dispatch('show-message', msg: 'Data period berhasil dihapus');
+            $this->dispatch('show-message', msg: 'Data tahun ajaran berhasil dihapus');
         }
+    }
+
+
+    #[On('activate')]
+    public function activate($id)
+    {
+        Period::where('is_active', 'Y')->update(['is_active' => 'N']);
+
+        $period = Period::find($id);
+        $period->is_active = 'Y';
+        $period->save();
+
+        $this->dispatch('refresh')->to(PeriodTable::class);
+        $this->dispatch('show-message', msg: 'Data tahun ajaran berhasil diaktifkan');
     }
 
     public function resetForm()

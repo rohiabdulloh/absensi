@@ -2,7 +2,7 @@
     <head>
         <title>Data Guru</title>
         <style>
-            @page { size: A4 landscape; margin:20px; }
+            @page { size: A4 portrait; margin:20px; }
             body { font-family: sans-serif; font-size: 10pt; }
             table { width:100%; border-collapse: collapse; margin-top:10px; }
             th, td { padding:5px; border:1px solid #000; text-align:center; }
@@ -10,11 +10,9 @@
         </style>
     </head>
     <body>
+        <h1 style="font-size:16pt; text-align:center;font-weight: bold;">Data Guru</h1>
         <table>
             <thead>
-                <tr>
-                    <th colspan="3" style="font-size:16pt;">Data Guru</th>
-                </tr>
                 <tr>
                     <th>No</th>
                     <th>NIP</th>

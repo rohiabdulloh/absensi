@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->enum('gender',['M','F']);
             $table->year('year_entry');
+            $table->string('parent_hp')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

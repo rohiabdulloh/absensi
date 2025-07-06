@@ -1,5 +1,6 @@
 <div class="flex flex-col space-y-3">
     <x-breadcrumbs>
+        <x-breadcrumbs-link>Pengaturan</x-breadcrumbs-link>
         <x-breadcrumbs-link current="true">Data Kelas</x-breadcrumbs-link>
     </x-breadcrumbs>
 
@@ -23,8 +24,12 @@
                     <h3>{{ ($isEdit) ? "Edit" : "Tambah" }} Data Kelas</h3>
                 </x-slot>
                 <div class="flex flex-col space-y-2">
-                    <x-input inline="false" label="Tingkat*" model="grade"/>
-                    <x-input inline="false" label="Nama Rombel*" model="name"/>
+                    <x-select inline="false" label="Tingkat*" model="grade">
+                        @foreach($grades as $key=>$val)
+                        <option value="{{ $key }}">{{ $val }}</option>
+                        @endforeach
+                    </x-select>
+                    <x-input inline="false" label="Nama Kelas*" model="name"/>
                 </div>
             </x-modal>
         </form>

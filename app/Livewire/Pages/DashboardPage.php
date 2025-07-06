@@ -22,7 +22,7 @@ class DashboardPage extends Component
             ['label'=>'Jumlah Guru', 'color'=>'bg-blue-500', 'icon'=>'fas-user-tie', 'label-color'=>'bg-blue-400', 
                 'data' => Teacher::count()
             ],
-            ['label'=>'Jumlah Rombel', 'color'=>'bg-amber-500', 'icon'=>'fas-chalkboard-teacher', 'label-color'=>'bg-amber-400', 
+            ['label'=>'Jumlah Kelas', 'color'=>'bg-amber-500', 'icon'=>'fas-chalkboard-teacher', 'label-color'=>'bg-amber-400', 
                 'data' => Classroom::count()
             ],
             ['label'=>'Siswa Absen', 'color'=>'bg-green-500', 'icon'=>'fas-user-times', 'label-color'=>'bg-green-400', 

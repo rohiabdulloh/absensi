@@ -51,9 +51,9 @@ class ClassroomTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Grade", "grade")->sortable()
+            Column::make("Tingkat", "grade")->sortable()
                 ->searchable(),
-            Column::make("Classroom Name", "name")->sortable()
+            Column::make("Nama Kelas", "name")->sortable()
                 ->searchable(),
             Column::make("Created At", "created_at")
                 ->sortable()->deselected()->collapseOnMobile(),

@@ -22,7 +22,7 @@
 
                 <div class="flex flex-col space-y-2 px-4 py-6">
                     <x-info>
-                        Import hanya dari file dengan format sesuai yang ditentukan atau dari hasil backup mesin.
+                        Import hanya dari file dengan format sesuai yang ditentukan.
 
                         <div class="mt-4">
                             <x-button wire:click="downloadFormat()" color="green">

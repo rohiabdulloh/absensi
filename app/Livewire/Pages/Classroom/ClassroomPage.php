@@ -15,6 +15,11 @@ class ClassroomPage extends Component
     public $id;   
     public $grade; 
     public $name;
+    public $grades = [];
+
+    public function mount(){
+        $this->grades = [1=>'X',2=>'XI',3=>'XII'];
+    }
 
     public function render()
     {

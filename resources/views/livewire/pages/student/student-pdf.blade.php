@@ -27,19 +27,16 @@
         </style>
     </head>
     <body>
+        <h1 style="text-align: center; font-size: 16pt; font-weight: bold;">Data Siswa</h1>
         <table>
             <thead>
-                <tr>
-                    <th colspan="7" style="text-align: center; font-size: 16pt; font-weight: bold;">Data Siswa</th>
-                </tr>
                 <tr>
                     <th>No</th>
                     <th>NIS</th>
                     <th>Nama</th>
                     <th>Jenis Kelamin</th>
+                    <th>HP Orang Tua</th>
                     <th>Tahun Masuk</th>
-                    <th>Kelas</th>
-                    <th>Periode</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,10 +45,9 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $student->nis }}</td>
                     <td>{{ $student->name }}</td>
-                    <td>{{ $student->gender === 'M' ? 'Laki-laki' : 'Perempuan' }}</td>
+                    <td>{{ $student->gender === 'M' ? 'L' : 'P' }}</td>
+                    <td>{{ $student->parent_hp }}</td>
                     <td>{{ $student->year_entry }}</td>
-                    <td>{{ optional($student->classroom)->name }}</td>
-                    <td>{{ optional($student->period)->name }}</td>
                 </tr>
             @endforeach
             </tbody>

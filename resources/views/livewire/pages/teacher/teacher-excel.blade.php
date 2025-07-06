@@ -10,7 +10,6 @@
                     <th style="text-align:center;border:1px solid #000;background-color:gray">No</th>
                     <th style="text-align:center;border:1px solid #000;background-color:gray">NIP</th>
                     <th style="text-align:center;border:1px solid #000;background-color:gray">Nama</th>
-                    <th style="text-align:center;border:1px solid #000;background-color:gray">Email</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +18,6 @@
                     <td style="border:1px solid #000">{{ $loop->iteration }}</td>
                     <td style="border:1px solid #000">{{ $t->nip }}</td>
                     <td style="border:1px solid #000">{{ $t->name }}</td>
-                    <td style="border:1px solid #000">{{ optional($t->user)->email }}</td>
                 </tr>
                 @endforeach
             </tbody>

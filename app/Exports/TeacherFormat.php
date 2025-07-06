@@ -12,7 +12,7 @@ class TeacherFormat implements FromArray, ShouldAutoSize
         return [
             [
                 'NIP',
-                'NAME',
+                'NAMA GURU',
             ]
         ];
     }

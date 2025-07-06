@@ -12,9 +12,10 @@ class StudentFormat implements FromArray, ShouldAutoSize
         return [
             [
                 'NIS',
-                'NAME',
-                'GENDER',
-                'YEAR_ENTRY',
+                'NAMA SISWA',
+                'JENIS KELAMIN',
+                'HP ORANG TUA',
+                'TAHUN MASUK',
             ]
         ];
     }

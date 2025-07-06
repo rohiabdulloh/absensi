@@ -40,7 +40,7 @@ class TeacherTable extends DataTableComponent
     {
         return [
             Column::make('NIP', 'nip')->sortable()->searchable(),
-            Column::make('Name', 'name')->sortable()->searchable(),
+            Column::make('Nama Guru', 'name')->sortable()->searchable(),
             Column::make('Created At', 'created_at')->sortable()->deselected()->collapseOnMobile(),
             Column::make('Updated At', 'updated_at')->sortable()->deselected()->collapseOnMobile(),
             Column::make('Actions', 'id')->view('livewire.pages.teacher.teacher-action')->collapseOnMobile(),

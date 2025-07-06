@@ -12,6 +12,7 @@ use App\Imports\TeacherImport;
 use App\Exports\TeacherExport;
 use App\Exports\TeacherFormat;
 use Maatwebsite\Excel\Facades\Excel;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class TeacherPage extends Component
 {
@@ -25,6 +26,7 @@ class TeacherPage extends Component
     public $user_id;
     public $nip;
     public $name;
+    public $file_import;
 
     public function render()
     {
@@ -49,7 +51,7 @@ class TeacherPage extends Component
     {
         $this->validate([
             'nip' => 'required|unique:teachers,nip,' . $this->id,
-            'name' => 'required|unique:teachers,name,' . $this->id,
+            'name' => 'required',
         ]);
 
         if ($this->isEdit) {
@@ -59,17 +61,15 @@ class TeacherPage extends Component
         }
 
         // Jika data baru atau belum ada user_id, buat user baru
-        if (!$teacher->user_id) {
-            $user = User::firstOrCreate(
-                ['name' => $this->name],
-                [
-                    'email' => strtolower(str_replace(' ', '', $this->name)) . '@example.com', 
-                    'password' => bcrypt('password')
-                ]
-            );
-            $teacher->user_id = $user->id;
-        }
-
+        $user = User::firstOrCreate(
+            ['username' => $this->nip],
+            [
+                'name' => $this->name, 
+                'email' => $this->nip . '@gmail.com', 
+                'password' => bcrypt($this->nip)
+            ]
+        );
+        $teacher->user_id = $user->id;
         $teacher->nip = $this->nip;
         $teacher->name = $this->name;
         $teacher->save();
@@ -91,6 +91,7 @@ class TeacherPage extends Component
     {
         $teacher = Teacher::find($this->idDelete);
         if ($teacher) {
+            $teacher->user()->delete();
             $teacher->delete();
             $this->dispatch('refresh')->to(TeacherTable::class);
             $this->dispatch('show-message', msg: 'Data teacher berhasil dihapus');
@@ -105,12 +106,22 @@ class TeacherPage extends Component
 
     public function exportExcel()
     {
-        return Excel::download(new TeacherExport(), 'Data Teacher.xlsx');
+        return Excel::download(new TeacherExport(), 'Data Guru.xlsx');
     }
 
     public function downloadFormat()
     {
-        return Excel::download(new TeacherFormat(), 'Format Data Teacher.xlsx');
+        return Excel::download(new TeacherFormat(), 'Format Data Guru.xlsx');
+    }    
+
+    // Export PDF
+    public function exportPDF()
+    {
+        $teachers = Teacher::all();
+        $pdf = PDF::loadView('livewire.pages.teacher.teacher-pdf', compact('teachers'));
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'Data_Guru.pdf');
     }
 
     public function importTeacher()

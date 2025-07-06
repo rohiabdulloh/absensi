@@ -4,8 +4,8 @@ namespace App\Livewire\Pages\Student;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
-use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Hash;
+use Livewire\WithFileUploads;
 
 use App\Models\Student;
 use App\Models\Classroom;
@@ -32,16 +32,21 @@ class StudentPage extends Component
     public $name;
     public $gender;
     public $year_entry;
+    public $parent_hp;
 
     public $file_import;
 
     public $classrooms = [];
     public $periods = [];
 
+    public function mount(){
+        $this->gender = 'M';
+    }
+
     public function render()
     {
-        $this->classrooms = Classrooms::all();
-        $this->periods = Periods::all();
+        $this->classrooms = Classroom::all();
+        $this->periods = Period::all();
         return view('livewire.pages.student.student-page')->layout('layouts.app');
     }
 
@@ -57,6 +62,7 @@ class StudentPage extends Component
             'name'       => $student->name,
             'gender'     => $student->gender,
             'year_entry' => $student->year_entry,
+            'parent_hp'  => $student->parent_hp,
         ]);
 
         $this->dispatch('open-modal');
@@ -77,25 +83,14 @@ class StudentPage extends Component
             $student = new Student();
         }        
 
-        $user = null;
-
-        if ($student->user_id) {
-            $user = User::find($student->user_id);
-        }
-
-        if (!$user) {
-            $username = $this->nis;
-            $user = User::where('username', $username)->first();
-
-            if (!$user) {
-                $user = User::create([
-                    'username' => $username,
-                    'name' => $this->name,
-                    'email' => $username . '@example.com', 
-                    'password' => Hash::make('password123'),
-                ]);
-            }
-        }
+        $user = User::firstOrCreate(
+            ['username' => $this->nis],
+            [
+                'name' => $this->name, 
+                'email' => $this->nis . '@gmail.com', 
+                'password' => bcrypt($this->nis)
+            ]
+        );
 
         // Set user_id ke student
         $student->user_id = $user->id;
@@ -103,6 +98,7 @@ class StudentPage extends Component
         $student->name = $this->name;
         $student->gender = $this->gender;
         $student->year_entry = $this->year_entry;
+        $student->parent_hp = $this->parent_hp;
 
         if ($this->isEdit) {
             $student->update();
@@ -146,7 +142,7 @@ class StudentPage extends Component
     public function exportExcel()
     {
         $export = new StudentExport();
-        return Excel::download($export, 'Data_Students.xlsx');
+        return Excel::download($export, 'Data_Siswa.xlsx');
     }
 
     // Export PDF
@@ -156,14 +152,14 @@ class StudentPage extends Component
         $pdf = PDF::loadView('livewire.pages.student.student-pdf', compact('students'));
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'Data_Students.pdf');
+        }, 'Data_Siswa.pdf');
     }
 
     // Download Format Excel
     public function downloadFormat()
     {
         $format = new StudentFormat();
-        return Excel::download($format, 'Format_Data_Students.xlsx');
+        return Excel::download($format, 'Format_Data_Siswa.xlsx');
     }
 
     // Import Excel

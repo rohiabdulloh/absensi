@@ -44,11 +44,13 @@ class PeriodTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make('Year Start', 'year_start')->sortable()->searchable(),
-            Column::make('Year End', 'year_end')->sortable()->searchable(),
-            Column::make('Active', 'is_active')
-                ->format(fn($value) => $value === 'Y' ? 'Yes' : 'No')
-                ->sortable(),
+            Column::make('Tahun Ajaran', 'year_start')
+                ->format(fn ($value, $row) => $row->year_start . '/' . $row->year_end)
+                ->sortable()
+                ->searchable(),
+            Column::make('Year End', 'year_end')
+                ->hideIf(true),
+            Column::make('Active', 'is_active')->view('livewire.pages.period.period-active')->sortable(),
             Column::make('Created At', 'created_at')->sortable()->deselected()->collapseOnMobile(),
             Column::make('Updated At', 'updated_at')->sortable()->deselected()->collapseOnMobile(),
             Column::make('Actions', 'id')->view('livewire.pages.period.period-action')->collapseOnMobile(),

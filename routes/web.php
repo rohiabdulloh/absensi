@@ -12,21 +12,23 @@ use App\Livewire\Pages\Student\StudentPage;
 use App\Livewire\Pages\Classroom\ClassroomPage;
 use App\Livewire\Pages\Period\PeriodPage;
 use App\Livewire\Pages\Teacher\TeacherPage;
+use App\Livewire\Pages\Teacher\TeacherClassPage;
 
 Route::group(['middleware'=>'auth'], function(){     
     Route::get('/', DashboardPage::class)->name('home');
     Route::get('/dashboard', DashboardPage::class)->name('dashboard');
     Route::get('/profil', UserProfile::class)->name('profile');
-    Route::get('/logo', SettingPage::class)->name('logo');
 });
 
 
 Route::middleware(['auth','role:superadmin'])->prefix('/admin')->group(function(){    
     Route::get('/user', UserPage::class)->name('user');
-    Route::get('/student', StudentPage::class)->name('student');
-    Route::get('/rombel', ClassroomPage::class)->name('classroom');
-    Route::get('/periode', PeriodPage::class)->name('period');
-    Route::get('/teacher', TeacherPage::class)->name('teacher');
+    Route::get('/siswa', StudentPage::class)->name('student');
+    Route::get('/kelas', ClassroomPage::class)->name('classroom');
+    Route::get('/tahun-ajaran', PeriodPage::class)->name('period');
+    Route::get('/guru', TeacherPage::class)->name('teacher');
+    Route::get('/wali_kelas', TeacherClassPage::class)->name('teacher_class');
+    Route::get('/logo', SettingPage::class)->name('logo');
 });
 
 

@@ -18,17 +18,18 @@ class StudentImport implements ToCollection, WithHeadingRow
         foreach ($rows as $row) 
         {
             $nis = $row['nis'];
-            $name = $row['name'];
-            $gender = strtoupper($row['gender']);
-            $yearEntry = $row['year_entry'];
+            $name = $row['nama_siswa'];
+            $gender = strtoupper($row['jenis_kelamin']) == 'L' ? 'M' : 'F';
+            $parentHp = $row['hp_orang_tua'];
+            $yearEntry = $row['tahun_masuk'];
 
-            // Cari student berdasarkan NIS
             $student = Student::where('nis', $nis)->first();
 
             if ($student) {
                 // Update data student
                 $student->name = $name;
                 $student->gender = $gender;
+                $student->parent_hp = $parentHp;
                 $student->year_entry = $yearEntry;
 
                 // Jika belum ada user_id, buat user baru dan hubungkan
@@ -48,6 +49,7 @@ class StudentImport implements ToCollection, WithHeadingRow
                 $student->nis = $nis;
                 $student->name = $name;
                 $student->gender = $gender;
+                $student->parent_hp = $parentHp;
                 $student->year_entry = $yearEntry;
                 $student->save();
             }
@@ -58,7 +60,7 @@ class StudentImport implements ToCollection, WithHeadingRow
     {
         // Membuat username dari NIS dan email dummy (atau sesuaikan)
         $username = $nis;
-        $email = $username.'@example.com';
+        $email = $username.'@gmail.com';
 
         // Jika user sudah ada (berdasarkan username), return user tersebut
         $user = User::where('username', $username)->first();
@@ -71,7 +73,7 @@ class StudentImport implements ToCollection, WithHeadingRow
             'username' => $username,
             'name' => $name,
             'email' => $email,
-            'password' => Hash::make('password123'),
+            'password' => Hash::make($nis),
         ]);
     }
 }

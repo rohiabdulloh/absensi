@@ -67,8 +67,8 @@
                     <span class="ml-2 text-sm">Pengaturan</span>
                 </x-slot>
                 <x-menu-sub link="/admin/logo">Ubah Logo</x-menu-sub>
-                <x-menu-sub link="/admin/periode">Data Periode</x-menu-sub>
-                <x-menu-sub link="/admin/rombel">Data Rombel</x-menu-sub>
+                <x-menu-sub link="/admin/tahun-ajaran">Data Tahun Ajaran</x-menu-sub>
+                <x-menu-sub link="/admin/kelas">Data Kelas</x-menu-sub>
                 <x-menu-sub link="/admin/pengaturan">Pengaturan Aplikasi</x-menu-sub>
             </x-menu-dropdown> 
 
