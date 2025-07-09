@@ -10,4 +10,10 @@ class Classroom extends Model
         'grade',
         'name',
     ];
+
+    
+    public function students()
+    {
+        return $this->hasMany(StudentClass::class, 'class_id');
+    }
 }
