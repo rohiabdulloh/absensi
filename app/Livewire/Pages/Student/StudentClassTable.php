@@ -77,7 +77,11 @@ class StudentClassTable extends DataTableComponent
        return [
             Column::make("NIS", "nis")->sortable()->searchable(),
             Column::make("Nama", "name")->sortable()->searchable(),
-            Column::make("Jenis Kelamin", "gender")->sortable()->searchable()->collapseOnMobile(),
+            Column::make("Jenis Kelamin", "gender")
+                ->format(function ($value) {
+                    return $value == 'M' ? 'L' : ($value == 'F' ? 'P' : $value);
+                })
+                ->sortable()->searchable()->collapseOnMobile(),
             Column::make("Aksi", "id")->format(function ($value, $row) {
                 return view('livewire.pages.student.student-class-action', [
                     'value' => $value,

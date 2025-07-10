@@ -69,6 +69,7 @@ class TeacherPage extends Component
                 'password' => bcrypt($this->nip)
             ]
         );
+        $user->assignRole('guru');
         $teacher->user_id = $user->id;
         $teacher->nip = $this->nip;
         $teacher->name = $this->name;

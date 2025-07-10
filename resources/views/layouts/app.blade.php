@@ -38,15 +38,29 @@
                @include('layouts.sidebar-admin') 
             @endif
 
+            @role('siswa')
+               @include('layouts.sidebar-student') 
+            @endif
+
             <div class="flex-1 overflow-hidden">
                <div class="flex flex-col h-screen">
                   <header>
-                     @include('layouts.header')               
+                     @if(Auth::user()->hasRole('siswa'))
+                        @include('layouts.header-front')
+                     @elseif(Auth::user()->hasRole(['superadmin', 'guru']))
+                        @include('layouts.header')  
+                     @endif            
                   </header>
 
                   <main class="flex-1 px-4 py-4 overflow-y-auto">            
                      {{ $slot }}
                   </main>
+
+                  @role('siswa')
+                     <nav>
+                        @include('layouts.bottom-navigation')
+                     </nav>
+                  @endrole 
                </div> 
             </div> 
             

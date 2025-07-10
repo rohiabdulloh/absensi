@@ -41,6 +41,7 @@ class StudentPage extends Component
 
     public function mount(){
         $this->gender = 'M';
+        $this->year_entry = date('Y');
     }
 
     public function render()
@@ -91,6 +92,7 @@ class StudentPage extends Component
                 'password' => bcrypt($this->nis)
             ]
         );
+        $user->assignRole('siswa');
 
         // Set user_id ke student
         $student->user_id = $user->id;

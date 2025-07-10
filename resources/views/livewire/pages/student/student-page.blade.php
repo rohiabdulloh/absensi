@@ -44,7 +44,11 @@
                         <option value="F">Perempuan</option>
                     </x-select>
                     <x-input inline="false" label="No. HP Ortu" model="parent_hp"/>   
-                    <x-input type="number" length="4" inline="false" label="Tahun Masuk*" model="year_entry"/>  
+                   <x-select inline="false" label="Tahun Masuk*" model="year_entry"> 
+                        @for($t=2022; $t<=date('Y'); $t++)
+                            <option value="{{ $t }}">{{ $t }}</option>
+                        @endfor
+                    </x-select>  
                 </div>
             </x-modal>
         </form>

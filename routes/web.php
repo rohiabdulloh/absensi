@@ -2,11 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Livewire\Pages\DashboardPage;
-use App\Livewire\Pages\SettingPage;
+use App\Livewire\App\DashboardPage;
 
 use App\Livewire\Pages\User\UserProfile;
 use App\Livewire\Pages\User\UserPage;
+use App\Livewire\Pages\Setting\SettingPage;
 
 use App\Livewire\Pages\Student\StudentPage;
 use App\Livewire\Pages\Student\StudentClassPage;
@@ -21,6 +21,10 @@ Route::group(['middleware'=>'auth'], function(){
     Route::get('/profil', UserProfile::class)->name('profile');
 });
 
+
+Route::middleware(['auth','role:siswa'])->prefix('/siswa')->group(function(){    
+   
+});
 
 Route::middleware(['auth','role:superadmin'])->prefix('/admin')->group(function(){    
     Route::get('/user', UserPage::class)->name('user');

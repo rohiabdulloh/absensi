@@ -29,6 +29,8 @@ class TeacherImport implements ToCollection, WithHeadingRow
                 ]
             );
 
+            $user->assignRole('guru');
+
             if ($teacher) {
                 $teacher->name = $row['nama_guru'];
                 $teacher->user_id = $user->id;

@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire\Pages;
+namespace App\Livewire\Pages\Setting;
 
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -23,7 +23,7 @@ class SettingPage extends Component
 
     public function render()
     {
-        return view('livewire.pages.setting')->layout('layouts.app');
+        return view('livewire.pages.setting.setting-page')->layout('layouts.app');
     }
 
     public function save(){

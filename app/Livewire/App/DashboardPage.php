@@ -1,5 +1,5 @@
 <?php
-namespace App\Livewire\Pages;
+namespace App\Livewire\App;
 
 use Livewire\Component;
 use Carbon\Carbon;
@@ -32,7 +32,7 @@ class DashboardPage extends Component
        
         $this->students = Student::all();
 
-        return view('livewire.pages.dashboard', [
+        return view('livewire.app.dashboard', [
             'widget' => $widget,
             'label' => [],
             'chart' => [],

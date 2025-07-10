@@ -52,6 +52,8 @@ class StudentImport implements ToCollection, WithHeadingRow
                 $student->parent_hp = $parentHp;
                 $student->year_entry = $yearEntry;
                 $student->save();
+
+                $user->assignRole('siswa');
             }
         }
     }

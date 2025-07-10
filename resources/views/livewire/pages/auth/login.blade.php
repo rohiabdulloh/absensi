@@ -41,7 +41,7 @@ new #[Layout('layouts.guest')] class extends Component
 
     <form wire:submit="login">
         <div class="flex flex-col space-y-3">
-            <x-input label="Email" model="form.email" inline="false"/>
+            <x-input label="Email/NIS/NIP" model="form.email" inline="false"/>
             <x-input type="password" label="Password" model="form.password" inline="false"/>
             <label for="remember" class="inline-flex items-center">
                 <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">

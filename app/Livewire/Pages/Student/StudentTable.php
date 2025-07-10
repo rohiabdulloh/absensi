@@ -53,7 +53,11 @@ class StudentTable extends DataTableComponent
         return [
             Column::make("NIS", "nis")->sortable()->searchable(),
             Column::make("Nama", "name")->sortable()->searchable(),
-            Column::make("Jenis Kelamin", "gender")->sortable()->searchable()->collapseOnMobile(),
+            Column::make("Jenis Kelamin", "gender")
+                ->format(function ($value) {
+                    return $value == 'M' ? 'L' : ($value == 'F' ? 'P' : $value);
+                })
+                ->sortable()->searchable()->collapseOnMobile(),
             Column::make("HP Orang Tua", "parent_hp")->sortable()->searchable()->collapseOnMobile(),
             Column::make("Tahun Masuk", "year_entry")->sortable()->searchable()->collapseOnMobile(),
             Column::make("Dibuat", "created_at")->sortable()->deselected()->collapseOnMobile(),

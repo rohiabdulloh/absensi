@@ -21,10 +21,10 @@
     <x-alert/>
     
     <x-slot name="footer">
-        <x-button type="submit" color="primary" class="mt-2">
+        <x-button-primary type="submit" color="primary" class="mt-2">
             <x-fas-save class="h-4 w-4"/>    
             <span> Simpan </span>
-        </x-button>
+        </x-button-primary>
     </x-slot>
 </x-card>
 </form>
