@@ -1,4 +1,4 @@
-<div x-data="{showConfirm: false, text: ''}" x-on:deleteData="">
+<div x-data="{showConfirm: false}" x-on:open-confirm.window="showConfirm = true" x-on:close-confirm.window="showConfirm = false">
 	<x-backdrop show="showConfirm" onclose="showConfirm = false"/>
 
 	<div
@@ -19,10 +19,10 @@
 				<h2>Konfirmasi!</h3>
 			</div>
 
-			<div class="relative p-4 overflow-hidden" x-text="text"></div>
+			<div class="relative p-4 overflow-hidden">{{$slot}}</div>
 
 			<div class="flex items-center justify-end space-x-2 p-4 text-gray-500 dark:text-light">
-				<x-button-primary onclick="showConfirm=false" wireclick="delete()" color="primary">  
+				<x-button-primary onclick="showConfirm=false" wireclick="confirm" color="primary">  
 					<span> OK </span>
 				</x-button-primary>
 				<x-button onclick="showConfirm=false" color="red">

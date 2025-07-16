@@ -17,9 +17,10 @@ return new class extends Migration
             $table->date('date');
             $table->date('date_start');
             $table->date('date_end');
-            $table->integer('type');
+            $table->enum('type', ['S','I'])->default('I');
             $table->string('description');
-            $table->date('approved')->nullable();
+            $table->enum('status', ['Diterima', 'Ditolak', 'Menunggu'])->default('Menunggu');
+            $table->string('attachment')->nullable();
             $table->timestamps();
         });
     }

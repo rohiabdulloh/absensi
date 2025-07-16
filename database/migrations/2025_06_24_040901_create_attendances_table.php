@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('student_id')->constrained('students')->onDelete('cascade');
             $table->date('date');
-            $table->time('check_in');
-            $table->time('check_out');
+            $table->time('check_in')->nullable();
+            $table->time('check_out')->nullable();
             $table->string('status', 15);
+            $table->integer('year');
+            $table->integer('leave_id')->nullable();
             $table->timestamps();
         });
     }

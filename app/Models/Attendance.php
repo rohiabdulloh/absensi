@@ -13,6 +13,7 @@ class Attendance extends Model
         'check_in',
         'check_out',
         'status',
+        'year',
     ];
 
     public function student()

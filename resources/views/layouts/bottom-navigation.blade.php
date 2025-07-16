@@ -14,7 +14,7 @@
       </x-nav-bottom>
 
       <!-- Notifications Button -->
-      <x-nav-bottom link="siswa/izin">
+      <x-nav-bottom link="/siswa/ijin">
         <x-fas-user-slash class="w-5 h-5"/>
         <span class="text-xs">Tidak Masuk</span>
       </x-nav-bottom>

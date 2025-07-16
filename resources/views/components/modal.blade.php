@@ -48,10 +48,10 @@
                 @if(isset($action))
                     {{$action}}
                 @else
-                    <x-button-primary type="submit" color="primary">
+                    <x-button type="submit" color="blue">
                         <x-fas-save class="h-4 w-4"/>    
                         <span> Simpan </span>
-                    </x-button-primary>
+                    </x-button>
                 @endif
             </div>
             @endif

@@ -2,23 +2,29 @@
 namespace App\Livewire\Pages\Setting;
 
 use Livewire\Component;
-use Livewire\WithFileUploads;
 use Carbon\Carbon;
 
-use App\Models\User;
+use App\Models\Setting;
 class SettingPage extends Component
 {
-    use WithFileUploads;
     
-    public $logo;
-    public $favicon;
-    public $fileLogo;
-    public $fileFavicon;
+    public $checkin_time;
+    public $checkin_start;
+    public $checkin_end;
+    public $checkout_time;
+    public $checkout_start;
+    public $checkout_end;
+    public $saturday_off;
 
     public function mount()
     {
-        $this->logo = asset('storage/setting/logo.png');
-        $this->favicon = asset('storage/setting/favicon.png');
+        $this->checkin_time = Setting::getValue('checkin_time');
+        $this->checkin_start = Setting::getValue('checkin_start');
+        $this->checkin_end = Setting::getValue('checkin_end');
+        $this->checkout_time = Setting::getValue('checkout_time');
+        $this->checkout_start = Setting::getValue('checkout_start');
+        $this->checkout_end = Setting::getValue('checkout_end');
+        $this->saturday_off = Setting::getValue('saturday_off');
     }
 
     public function render()
@@ -27,23 +33,13 @@ class SettingPage extends Component
     }
 
     public function save(){
-        //Menerapkan validasi data
-        $this->validate([
-            'fileLogo' => 'nullable|mimes:png|max:2000',
-            'fileFavicon' => 'nullable|mimes:png|max:1000',
-        ]);
-
-        //upload gambar
-        if($this->fileLogo){
-            $namalogo = "logo.png";
-            $this->fileLogo->storeAs('/setting', $namalogo, 'public');
-        }
-
-        if($this->fileFavicon){
-            $namafavicon = "favicon.png";
-            $this->fileFavicon->storeAs('/setting', $namafavicon, 'public');
-        }
-
-         $this->dispatch('show-message', msg:'Data berhasil disimpan');   
+        Setting::setValue('checkin_time', $this->checkin_time);
+        Setting::setValue('checkin_start', $this->checkin_start);
+        Setting::setValue('checkin_end', $this->checkin_end);
+        Setting::setValue('checkout_time', $this->checkout_time);
+        Setting::setValue('checkout_start', $this->checkout_start);
+        Setting::setValue('checkout_end', $this->checkout_end);
+        Setting::setValue('saturday_off', $this->saturday_off);
+        $this->dispatch('show-message', msg:'Pengaturan berhasil disimpan');   
     }
 }

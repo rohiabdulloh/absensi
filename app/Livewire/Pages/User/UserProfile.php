@@ -41,6 +41,7 @@ class UserProfile extends Component
         $this->validate([
             'name' => 'required',
             'email' => 'required|email',
+            'filePhoto' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:1024',
         ]);
 
         //upload gambar

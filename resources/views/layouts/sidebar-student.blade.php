@@ -1,5 +1,5 @@
 <!-- Sidebar -->
-<aside class="flex flex-col w-64 h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 
+<aside class="hidden md:flex flex-col w-64 h-full bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 
     transition-all duration-300 fixed z-30 md:z-10 md:relative"
     :class="{ '-ml-64': !isSidebarOpen }">
 
@@ -19,18 +19,18 @@
                 <span class="ml-2 text-sm"> Beranda </span>
             </x-menu>  
             
-            <x-menu link="/">
+            <x-menu link="/siswa/rekap">
                 <x-fas-calendar-check class="h-5 w-5"/>    
                 <span class="ml-2 text-sm"> Rekap Presensi</span>
             </x-menu>  
 
-            <x-menu link="/">
+            <x-menu link="/siswa/ijin">
                 <x-fas-user-slash class="h-5 w-5"/>    
-                <span class="ml-2 text-sm"> Izin Tidak Masuk</span>
+                <span class="ml-2 text-sm"> Tidak Masuk</span>
             </x-menu>  
 
             
-            <x-menu link="/profile">
+            <x-menu link="/profil">
                 <x-fas-user-circle class="h-5 w-5"/>    
                 <span class="ml-2 text-sm"> Profil</span>
             </x-menu>  

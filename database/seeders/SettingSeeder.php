@@ -11,9 +11,15 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         Setting::insert([
-            ['key' => 'app_name', 'value' => 'Antor Kelapa'],
-            ['key' => 'app_email', 'value' => 'admin@smknegeri1dukuhturi.sch.id'],
-            ['key' => 'timezone', 'value' => 'UTC'],
+            ['key' => 'checkin_time', 'value' => '07:00'],
+            ['key' => 'checkin_start', 'value' => '06:00'],
+            ['key' => 'checkin_end', 'value' => '08:00'],
+
+            ['key' => 'checkout_time', 'value' => '15:00'],
+            ['key' => 'checkout_start', 'value' => '14:00'],
+            ['key' => 'checkout_end', 'value' => '16:00'],
+
+            ['key' => 'saturday_off', 'value' => 'Y'],
         ]);
     }
 }
