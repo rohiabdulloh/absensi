@@ -20,6 +20,7 @@ class Teacher extends Model
 
     public function classes()
     {
-        return $this->hasMany(TeacherClass::class);
+        return $this->belongsToMany(Classroom::class, 'teacher_classes', 'teacher_id', 'class_id')
+            ->withPivot('year');
     }
 }

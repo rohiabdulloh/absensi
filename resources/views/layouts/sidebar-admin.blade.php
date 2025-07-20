@@ -42,10 +42,9 @@
                     <x-fas-clipboard-check class="h-5 w-5"/>    
                     <span class="ml-2 text-sm">Presensi</span>
                 </x-slot>
-                <x-menu-sub link="/admin/pesan_whatsapp">Pesan WhatsApp</x-menu-sub>
                 <x-menu-sub link="/admin/presensi">Data Presensi</x-menu-sub>
-                <x-menu-sub link="/admin/siswa_absen">Data Siswa Absen</x-menu-sub>
-                <x-menu-sub link="/admin/siswa_terlambat">Data Siswa Terlambat</x-menu-sub>
+                <x-menu-sub link="/admin/presensi/absen">Data Siswa Alfa</x-menu-sub>
+                <x-menu-sub link="/admin/presensi/ijin">Data Pengajuan Ijin</x-menu-sub>
             </x-menu-dropdown>   
 
             

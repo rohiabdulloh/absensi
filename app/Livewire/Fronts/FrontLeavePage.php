@@ -8,7 +8,7 @@ use Livewire\WithFileUploads;
 use App\Models\Leave;
 use App\Models\Student;
 
-class LeavePage extends Component
+class FrontLeavePage extends Component
 {
     use WithFileUploads;
 

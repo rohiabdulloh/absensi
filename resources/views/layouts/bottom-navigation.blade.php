@@ -15,8 +15,8 @@
 
       <!-- Notifications Button -->
       <x-nav-bottom link="/siswa/ijin">
-        <x-fas-user-slash class="w-5 h-5"/>
-        <span class="text-xs">Tidak Masuk</span>
+        <x-fas-envelope class="w-5 h-5"/>
+        <span class="text-xs">Ijin</span>
       </x-nav-bottom>
 
       <!-- Profile Button -->

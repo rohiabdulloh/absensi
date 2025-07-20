@@ -25,8 +25,8 @@
             </x-menu>  
 
             <x-menu link="/siswa/ijin">
-                <x-fas-user-slash class="h-5 w-5"/>    
-                <span class="ml-2 text-sm"> Tidak Masuk</span>
+                <x-fas-envelope class="h-5 w-5"/>    
+                <span class="ml-2 text-sm"> Ijin </span>
             </x-menu>  
 
             

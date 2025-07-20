@@ -56,17 +56,15 @@ class StudentClassTable extends DataTableComponent
     {
         $class = $this->class;
         $year = $this->year;
-        $students = Student::query()->with(['classes', 'classes.classroom']);
+        $students = Student::query()->with(['classes']);
         if ($class == 0) {
-            // Siswa yang TIDAK memiliki kelas pada tahun tertentu
             $students->whereDoesntHave('classes', function ($query) use ($year) {
-                $query->where('year', $year);
+                $query->where('student_classes.year', $year);
             });
         } else {
-            // Siswa yang ADA dalam kelas tertentu dan tahun tertentu
             $students->whereHas('classes', function ($query) use ($year, $class) {
-                $query->where('year', $year)
-                    ->where('class_id', $class);
+                $query->where('student_classes.year', $year)
+                    ->where('classrooms.id', $class);
             });
         }
         return $students;

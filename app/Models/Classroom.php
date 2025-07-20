@@ -14,6 +14,14 @@ class Classroom extends Model
     
     public function students()
     {
-        return $this->hasMany(StudentClass::class, 'class_id');
+        return $this->belongsToMany(Student::class, 'student_classes', 'student_id', 'class_id')
+            ->withPivot('year');
+    }
+
+    
+    public function teachers()
+    {
+        return $this->belongsToMany(Teacher::class, 'student_classes', 'student_id', 'class_id')
+            ->withPivot('year');
     }
 }

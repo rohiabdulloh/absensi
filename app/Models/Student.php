@@ -27,16 +27,17 @@ class Student extends Model
 
     public function classes()
     {
-        return $this->hasMany(StudentClass::class);
+        return $this->belongsToMany(Classroom::class, 'student_classes', 'student_id', 'class_id')
+            ->withPivot('year');
     }
     
     public function attendance()
     {
-        return $this->hasMany(Attendance::class);
+        return $this->hasMany(Attendance::class, 'student_id');
     }
 
     
-    public function leace()
+    public function leave()
     {
         return $this->hasMany(Leave::class);
     }
