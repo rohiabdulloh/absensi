@@ -13,7 +13,7 @@
     <x-card class="min-h-full">
 
         <div class="w-full overflow-x-auto">
-            <livewire:pages.attendance.absent-table/>
+            <livewire:pages.attendance.absent-table  :year="$year" />
         </div>
         
     </x-card>
