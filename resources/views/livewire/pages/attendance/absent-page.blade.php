@@ -5,8 +5,12 @@
     </x-breadcrumbs>
 
     <x-page-header> Data Siswa Alfa
-        <x-slot:button>                   
-           
+        
+        <x-slot:button>
+            <x-button wireclick="sendWhatsapp" color="green">
+                <x-fab-whatsapp class="h-4 w-4 mr-2"/>
+                <span>Kirim Pesan Semua</span>
+            </x-button>
         </x-slot>
     </x-page-header>
 

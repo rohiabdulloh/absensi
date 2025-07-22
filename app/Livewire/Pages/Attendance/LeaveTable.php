@@ -24,6 +24,11 @@ class LeaveTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setDefaultSort('created_at', 'desc');
+
+        $this->setBulkActions([
+            'setApproved' => 'Setujui',
+            'setRejected' => 'Tolak',
+        ]);
     }
 
     public function builder(): Builder
@@ -33,10 +38,9 @@ class LeaveTable extends DataTableComponent
         $students = Leave::with([
             'student',
             'student.classes' => function ($query) use ($year) {
-                $query->where('year', $year);
+                $query->wherePivot('year', $year);
             },
-            'student.classes.classroom'
-        ])->where('date', $today);
+        ]);
 
         return $students;
     }
@@ -51,11 +55,35 @@ class LeaveTable extends DataTableComponent
     public function columns(): array
     { 
         return [
-            Column::make("NIS", "nis")->sortable()->searchable(),
-            Column::make("Nama", "name")->sortable()->searchable(),
-            Column::make("Kelas", "student.classes.classroom.name")->collapseOnMobile()->sortable(),
-            Column::make("Status", "status")->sortable()->searchable()->collapseOnMobile(),
+            Column::make("NIS", "student.nis")->sortable()->searchable(),
+            Column::make("Nama", "student.name")->sortable()->searchable(),
+            Column::make("Kelas", "student.classes.name")->collapseOnMobile()->sortable(),
+            Column::make("Status", "status")->sortable()->searchable()->collapseOnMobile()
+                ->format(function ($value, $row) {
+                    $colors = [
+                        'Disetujui'  => 'bg-green-500',
+                        'Ditolak'   => 'bg-red-500',
+                        'Menunggu'  => 'bg-gray-500',
+                    ];
+
+                    $color = $colors[$value] ?? 'bg-gray-500';
+
+                    return "<span class='text-white text-xs font-semibold px-2 py-1 rounded {$color}'>{$value}</span>";
+                })
+                ->html(),
+            Column::make("Aksi", "id")
+                ->view('livewire.pages.attendance.leave-action')->collapseOnMobile(),
         ];
     }
 
+    
+    public function setApproved()
+    {
+        $this->dispatch('approve', $this->getSelected());
+    }
+
+    public function setRejected()
+    {
+        $this->dispatch('reject', $this->getSelected());
+    }
 }

@@ -26,6 +26,9 @@ class AttendancePage extends Component
         return view('livewire.pages.attendance.attendance-page')->layout('layouts.app');
     }
 
+    public function reload(){
+        $this->dispatch('refresh')->to(AttendanceTable::class);
+    }
     
     public function setYear(){
         $activePeriod = Period::where('is_active', 'Y')->first();

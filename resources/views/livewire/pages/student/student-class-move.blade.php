@@ -46,10 +46,10 @@
                             <span> Tambahkan </span>
                         </x-button>
                     @else
-                        <x-button-primary type="submit" color="primary">
+                        <x-button type="submit" color="blue">
                             <x-fas-arrow-right-arrow-left class="h-4 w-4"/>    
                             <span> Pindah </span>
-                        </x-button-primary>                        
+                        </x-button>                        
                     @endif
                 </x-slot>
             </x-dialog>

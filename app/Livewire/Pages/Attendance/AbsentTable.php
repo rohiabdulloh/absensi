@@ -28,23 +28,27 @@ class AbsentTable extends DataTableComponent
     public function builder(): Builder
     {
         $year = $this->year;
+        $today = now()->toDateString();
         $students = Student::query()
             ->select(
                 'students.id',
                 'students.nis as student_nis',
                 'students.name as student_name',
-                'classrooms.name as class_name'
+                'classrooms.name as class_name',
+                'attendances.status as attendance_status'
             )
             ->join('student_classes', function ($join) {
                 $join->on('students.id', '=', 'student_classes.student_id')
                     ->where('student_classes.year', $this->year);
             })
             ->join('classrooms', 'student_classes.class_id', '=', 'classrooms.id')
-            ->whereNotExists(function ($query) {
-                $query->select(DB::raw(1))
-                    ->from('attendances')
-                    ->whereColumn('attendances.student_id', 'students.id')
-                    ->whereDate('attendances.date', now()->toDateString());
+            ->leftJoin('attendances', function ($join) use ($today) {
+                $join->on('students.id', '=', 'attendances.student_id')
+                     ->whereDate('attendances.date', $today);
+            })
+            ->where(function ($query) {
+                $query->whereNull('attendances.id')
+                      ->orWhere('attendances.status', 'A');
             });
 
         return $students;
@@ -74,6 +78,17 @@ class AbsentTable extends DataTableComponent
                 ->label(fn($row) => $row->class_name)
                 ->sortable()
                 ->searchable(),
+
+            Column::make("Status")
+                ->label(function ($row) {
+                    if (!is_null($row->attendance_status)) {
+                        return "<span class='bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded'>Terkirim</span>";
+                    } else {
+                        return "<span class='bg-yellow-500 text-white text-xs font-semibold px-2 py-1 rounded'>Belum</span>";
+                    }
+                })
+                ->html()
+                ->collapseOnMobile(),
         ];
     }
 

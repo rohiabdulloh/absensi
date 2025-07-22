@@ -14,9 +14,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased font-sans">
-       <div class="bg-primary hover:bg-primary-dark text-end py-5 pr-8 bg-purple-500 bg-blue-500
+       <div class="bg-primary hover:bg-primary-dark text-end py-5 pr-8 bg-purple-500 bg-blue-500 
+            bg-red-500 bg-green-500 bg-gray-500
             bg-purple-400 bg-blue-400 bg-green-400 bg-red-400 bg-red-100 bg-amber-500 bg-amber-400
-            text-purple-500 text-blue-500 text-green-500 text-red-500 bg-blue-300">
+            bg-blue-300
+            text-purple-500 text-blue-500 text-green-500 text-red-500 ">
         </div>
     </body>
 </html>

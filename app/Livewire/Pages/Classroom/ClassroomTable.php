@@ -59,7 +59,7 @@ class ClassroomTable extends DataTableComponent
                 ->sortable()->deselected()->collapseOnMobile(),
             Column::make("Updated At", "updated_at")
                 ->sortable()->deselected()->collapseOnMobile(),
-            Column::make("Actions", "id")
+            Column::make("Aksi", "id")
                 ->view('livewire.pages.classroom.classroom-action')->collapseOnMobile(),
         ];
     }

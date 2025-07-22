@@ -113,13 +113,7 @@ class StudentClassTable extends DataTableComponent
     
     public function moveSelected()
     {
-        $studentIds = [];
-        foreach($this->getSelected() as $item)
-        { 
-            $studentIds[] = $item;
-        }
-
-        if(count($studentIds) > 0) $this->dispatch('moveClass', $studentIds);
+        if(count($this->getSelected()) > 0) $this->dispatch('moveClass', $this->getSelected());
     }
 
 }

@@ -14,6 +14,13 @@
                 </x-select>
             </div>     
         </x-slot>
+
+        <x-slot:button>
+            <x-button-primary wireclick="reload">
+                <x-fas-redo class="h-4 w-4 mr-2"/>
+                <span>Refresh</span>
+            </x-button-primary>
+        </x-slot>
     </x-page-header>
 
     <x-card class="min-h-full">
