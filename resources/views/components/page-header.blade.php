@@ -1,7 +1,7 @@
 @props(['dropdownWidth' => '48'])
 <div class="flex flex-col md:flex-row md:items-center justify-between">
     <h2 class="text-2xl font-bold"> {{ $slot }}</h2>
-    <div class="flex space-x-2">   
+    <div class="flex space-x-2 justify-end">   
         @isset($filter)
             {{ $filter }} 
         @endisset

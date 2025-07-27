@@ -22,6 +22,12 @@ use App\Livewire\Pages\Attendance\AttendancePage;
 use App\Livewire\Pages\Attendance\AbsentPage;
 use App\Livewire\Pages\Attendance\LeavePage;
 
+use App\Livewire\Pages\Report\ReportPresentPage;
+use App\Livewire\Pages\Report\ReportPresentStudentPage;
+use App\Livewire\Pages\Report\ReportAbsentPage;
+use App\Livewire\Pages\Report\ReportLatePage;
+use App\Livewire\Pages\Report\ReportRecapPage;
+
 use App\Livewire\Fronts\ReportPage;
 use App\Livewire\Fronts\FrontLeavePage;
 
@@ -47,6 +53,13 @@ Route::middleware(['auth','role:superadmin'])->prefix('/admin')->group(function(
     Route::get('/presensi', AttendancePage::class)->name('attendance');
     Route::get('/presensi/absen', AbsentPage::class)->name('absent');
     Route::get('/presensi/ijin', LeavePage::class)->name('leave');
+
+     
+    Route::get('/laporan/presensi', ReportPresentPage::class)->name('report.present'); 
+    Route::get('/laporan/presensi_siswa', ReportPresentStudentPage::class)->name('report.present_student'); 
+    Route::get('/laporan/siswa_absen', ReportAbsentPage::class)->name('report.absent'); 
+    Route::get('/laporan/siswa_terlambat', ReportLatePage::class)->name('report.late'); 
+    Route::get('/laporan/rekap_presensi', ReportRecapPage::class)->name('report.recap'); 
 });
 
 

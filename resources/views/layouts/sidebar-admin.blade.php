@@ -53,10 +53,11 @@
                     <x-fas-print class="h-5 w-5"/>    
                     <span class="ml-2 text-sm">Laporan</span>
                 </x-slot>
-                <x-menu-sub link="/admin/laporan/persensi">Data Presensi</x-menu-sub>
+                <x-menu-sub link="/admin/laporan/presensi">Data Presensi</x-menu-sub>
+                <x-menu-sub link="/admin/laporan/presensi_siswa">Data Presensi Per Siswa</x-menu-sub>
                 <x-menu-sub link="/admin/laporan/siswa_absen">Data Siswa Absen</x-menu-sub>
                 <x-menu-sub link="/admin/laporan/siswa_terlambat">Data Siswa Terlambat</x-menu-sub>
-                <x-menu-sub link="/admin/laporan/rekap_siswa">Rekap Absensi Siswa</x-menu-sub>
+                <x-menu-sub link="/admin/laporan/rekap_presensi">Rekap Absensi Siswa</x-menu-sub>
             </x-menu-dropdown>   
 
 

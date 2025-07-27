@@ -58,6 +58,8 @@ class LeaveTable extends DataTableComponent
             Column::make("NIS", "student.nis")->sortable()->searchable(),
             Column::make("Nama", "student.name")->sortable()->searchable(),
             Column::make("Kelas", "student.classes.name")->collapseOnMobile()->sortable(),
+            Column::make("Tanggal Mulai", "date_start")->collapseOnMobile()->sortable(),
+            Column::make("Tanggal Selesai", "date_end")->collapseOnMobile()->sortable(),
             Column::make("Status", "status")->sortable()->searchable()->collapseOnMobile()
                 ->format(function ($value, $row) {
                     $colors = [
