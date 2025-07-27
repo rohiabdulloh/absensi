@@ -15,7 +15,6 @@ class SettingSeeder extends Seeder
             ['key' => 'checkin_start', 'value' => '06:00'],
             ['key' => 'checkin_end', 'value' => '08:00'],
 
-            ['key' => 'checkout_time', 'value' => '15:00'],
             ['key' => 'checkout_start', 'value' => '14:00'],
             ['key' => 'checkout_end', 'value' => '16:00'],
 

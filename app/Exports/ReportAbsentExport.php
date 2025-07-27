@@ -6,7 +6,7 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class ReportPresentExport implements FromView, ShouldAutoSize
+class ReportAbsentExport implements FromView, ShouldAutoSize
 {
     public $date, $classname, $year, $datareport;
 
@@ -19,7 +19,7 @@ class ReportPresentExport implements FromView, ShouldAutoSize
 
     public function view(): View
     {
-        return view('livewire.pages.report.report-present-excel', [
+        return view('livewire.pages.report.report-absent-excel', [
             'date' => $this->date,
             'classname' => $this->classname,
             'year' => $this->year,

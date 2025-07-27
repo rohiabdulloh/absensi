@@ -11,7 +11,7 @@ use App\Models\Period;
 use App\Models\Classroom;
 use App\Models\Student;
 
-use App\Exports\ReportPresentExport;
+use App\Exports\RaportRecapExport;
 use Maatwebsite\Excel\Facades\Excel;   
 use PDF;
 
@@ -63,23 +63,24 @@ class ReportRecapPage extends Component
     {
         $class = Classroom::find($this->class);
         $classname = $class->name ?? '-';
-        $excel = new ReportPresentExport($this->date_start, $classname, $this->year, $datareport);
-        return Excel::download($excel, 'Laporan Data Presensi.xlsx');
+        $excel = new RaportRecapExport($this->date_start,$this->date_end, $classname, $this->year, $datareport);
+        return Excel::download($excel, 'Laporan Rekap Presensi Siwsa.xlsx');
     }
 
     public function exportPDF($datareport)
     {
         $class = Classroom::find($this->class);
         $classname = $class->name ?? '-';
-        $date = $this->date;
+        $date_start = $this->date_start;
+        $date_end = $this->date_end;
         $year = $this->year;
 
-        $pdf = PDF::loadView('livewire.pages.report.report-present-pdf',  
-            compact('datareport','date','classname', 'year'))
+        $pdf = PDF::loadView('livewire.pages.report.report-recap-pdf',  
+            compact('datareport','date_start','date_end','classname', 'year'))
             ->setPaper('legal', 'landscape');        
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'Laporan Data Presensi.pdf');
+        }, 'Laporan Rekap Presensi Siswa.pdf');
     }
         
     public function updatedDateEnd(){

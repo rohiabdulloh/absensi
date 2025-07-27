@@ -9,7 +9,7 @@ use App\Models\Period;
 use App\Models\Classroom;
 use App\Models\Student;
 
-use App\Exports\ReportPresentExport;
+use App\Exports\ReportAbsentExport;
 use Maatwebsite\Excel\Facades\Excel;   
 use PDF;
 
@@ -61,8 +61,8 @@ class ReportAbsentPage extends Component
     {
         $class = Classroom::find($this->class);
         $classname = $class->name ?? '-';
-        $excel = new ReportPresentExport($this->date, $classname, $this->year, $datareport);
-        return Excel::download($excel, 'Laporan Data Presensi.xlsx');
+        $excel = new ReportAbsentExport($this->date, $classname, $this->year, $datareport);
+        return Excel::download($excel, 'Laporan Data Siswa Absen.xlsx');
     }
 
     public function exportPDF($datareport)
@@ -72,12 +72,12 @@ class ReportAbsentPage extends Component
         $date = $this->date;
         $year = $this->year;
 
-        $pdf = PDF::loadView('livewire.pages.report.report-present-pdf',  
+        $pdf = PDF::loadView('livewire.pages.report.report-absent-pdf',  
             compact('datareport','date','classname', 'year'))
             ->setPaper('legal', 'landscape');        
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'Laporan Data Presensi.pdf');
+        }, 'Laporan Data Siswa Absen.pdf');
     }
         
     public function updatedDate(){

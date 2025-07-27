@@ -5,13 +5,13 @@
     </x-breadcrumbs>
 
     <x-page-header> Laporan Data Presensi Siswa
-        <x-slot:action>     
-            <x-dropdown-link wire:click="" > 
+        <x-slot:action>    
+            <x-dropdown-link wire:click="exportExcel({{$datareport}})" > 
                 <x-fas-file-excel class="h-4 w-4 mr-2"/> 
                 <span>Export Excel </span>
             </x-dropdown-link>
             
-            <x-dropdown-link wire:click=""> 
+            <x-dropdown-link wire:click="exportPDF({{$datareport}})"> 
                 <x-fas-file-pdf class="h-4 w-4 mr-2"/> 
                 <span>Export PDF </span>
             </x-dropdown-link>

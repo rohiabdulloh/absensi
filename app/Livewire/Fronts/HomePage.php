@@ -24,7 +24,6 @@ class HomePage extends Component
     public $checkin_time;
     public $checkin_start;
     public $checkin_end;
-    public $checkout_time;
     public $checkout_start;
     public $checkout_end;
 
@@ -34,7 +33,6 @@ class HomePage extends Component
         $this->checkin_time = Carbon::createFromFormat('H:i', Setting::getValue('checkin_time'))->format('H:i:s');
         $this->checkin_start = Carbon::createFromFormat('H:i', Setting::getValue('checkin_start'))->format('H:i:s');
         $this->checkin_end = Carbon::createFromFormat('H:i', Setting::getValue('checkin_end'))->format('H:i:s');
-        $this->checkout_time = Carbon::createFromFormat('H:i', Setting::getValue('checkout_time'))->format('H:i:s');
         $this->checkout_start = Carbon::createFromFormat('H:i', Setting::getValue('checkout_start'))->format('H:i:s');
         $this->checkout_end = Carbon::createFromFormat('H:i', Setting::getValue('checkout_end'))->format('H:i:s');
     }
@@ -115,19 +113,9 @@ class HomePage extends Component
 
         $attendance = Attendance::where('student_id', $student->id)->where('date', $today)->first();
 
-        $checkoutTime = Setting::getvalue('checkout_time') ?? '14:00';
-        $checkoutTimeCarbon = Carbon::parse($today . ' ' . $checkoutTime);
         
-        $status = "";
-        if ($now->lt($checkoutTimeCarbon)) {
-            $status = 'PA'; // Pulang awal
-        }
         
         if ($attendance) {
-            if($status != ""){
-                if($attendance->status == 'H') $attendance->status = $status; 
-                else $attendance->status = 'T-'.$status;
-            }
             $attendance->check_out = $now->format('H:i:s');
             $attendance->save();
         } else {
@@ -137,7 +125,7 @@ class HomePage extends Component
                 'date'       => $today,
                 'check_in'   => null,
                 'check_out'  => $now->format('H:i:s'),
-                'status'     => $status == "" ? 'TAM' : 'TAM-'.$status,
+                'status'     => 'TAM',
                 'year'       => $this->year,
             ]);
 

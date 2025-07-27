@@ -11,7 +11,7 @@ use App\Models\Classroom;
 use App\Models\Student;
 use App\Models\Setting;
 
-use App\Exports\ReportPresentExport;
+use App\Exports\ReportPresentstudentExport;
 use Maatwebsite\Excel\Facades\Excel;   
 use PDF;
 
@@ -78,7 +78,7 @@ class ReportPresentStudentPage extends Component
                 'check_out' => $record->check_out ?? '-',
                 'status' => $record->status ?? '-',
             ];
-        })->toArray();
+        });
 
         return view('livewire.pages.report.report-present-student-page')->layout('layouts.app');
     }
@@ -97,23 +97,24 @@ class ReportPresentStudentPage extends Component
     {
         $class = Classroom::find($this->class);
         $classname = $class->name ?? '-';
-        $excel = new ReportPresentExport($this->date, $classname, $this->year, $datareport);
-        return Excel::download($excel, 'Laporan Data Presensi.xlsx');
+        $student = Student::find($this->student);
+        $month = $this->monthList[$this->month];
+        $excel = new ReportPresentStudentExport($month, $this->year, $student, $datareport);
+        return Excel::download($excel, 'Laporan Data Presensi '.($student?->name ?? 'Siswa').'.xlsx');
     }
 
     public function exportPDF($datareport)
     {
-        $class = Classroom::find($this->class);
-        $classname = $class->name ?? '-';
-        $date = $this->date;
+        $month = $this->monthList[$this->month];
+        $student = Student::find($this->student);
         $year = $this->year;
 
-        $pdf = PDF::loadView('livewire.pages.report.report-present-pdf',  
-            compact('datareport','date','classname', 'year'))
+        $pdf = PDF::loadView('livewire.pages.report.report-present-student-pdf',  
+            compact('datareport','month','student', 'year'))
             ->setPaper('legal', 'landscape');        
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
-        }, 'Laporan Data Presensi.pdf');
+        }, 'Laporan Data Presensi '.($student?->name ?? 'Siswa').'.pdf');
     }
   
     public function setYear(){

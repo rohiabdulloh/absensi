@@ -1,23 +1,24 @@
 <html>
     <head>
-        <title>Laporan Data Presensi</title>
+        <title>Laporan Rekap Absensi Siswa</title>
     </head>
     <body>
         <table>
             <thead>
                 <tr>
-                    <th colspan="7" style="text-align: center; font-size: 16pt; font-weight: bold;">LAPORAN DATA PRESENSI</th>
+                    <th colspan="10" style="text-align: center; font-size: 16pt; font-weight: bold;">LAPORAN REKAP ABSENSI SISWA</th>
                 </tr>
                 @if($classname!='-')                    
                     <tr>
-                        <th colspan="7" style="text-align: center; font-size: 16pt; font-weight: bold;">
-                            KELAS {{$classname}} 
+                        <th colspan="10" style="text-align: center; font-size: 16pt; font-weight: bold;">
+                            KELAS {{$classame}} 
                         </th>
                     </tr>
                 @endif
                 <tr>
-                    <th colspan="7" style="text-align: center; font-size: 12pt; font-weight: bold;">
-                        Tanggal {{date('d-m-Y', strtotime($date))}} 
+                <tr>
+                    <th colspan="10" style="text-align: center; font-size: 12pt; font-weight: bold;">
+                        Tanggal {{date('d-m-Y', strtotime($date_start))}} s/d {{date('d-m-Y', strtotime($date_start))}}
                     </th>
                 </tr>
                 <tr>
@@ -25,9 +26,10 @@
                     <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">NIS</th>
                     <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">Nama Siswa</th>
                     <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">Kelas</th>
-                    <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">Masuk</th>
-                    <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">Pulang</th>
-                    <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">Keterangan</th>
+                    <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">Izin</th>
+                    <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">Sakit</th>
+                    <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">Alfa</th>
+                    <th style="text-align: center; font-weight: bold; border: 1pt solid #000; background-color: gray">Terlambat</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,9 +39,10 @@
                     <td style="border: 1pt solid #000">{{ $data['student_nis'] }}</td>
                     <td style="border: 1pt solid #000">{{ $data['student_name'] }}</td>
                     <td style="border: 1pt solid #000">{{ $data['class_name'] }}</td>
-                    <td style="border: 1pt solid #000">{{ $data['check_in'] }}</td>
-                    <td style="border: 1pt solid #000">{{ $data['check_out'] }}</td>
-                    <td style="border: 1pt solid #000">{{ $data['status'] }}</td>
+                    <td style="border: 1pt solid #000">{{ $data['izin'] }}</td>
+                    <td style="border: 1pt solid #000">{{ $data['sakit'] }}</td>
+                    <td style="border: 1pt solid #000">{{ $data['alfa'] }}</td>
+                    <td style="border: 1pt solid #000">{{ $data['terlambat'] }}</td>
                 </tr>
             @endforeach
             </tbody>

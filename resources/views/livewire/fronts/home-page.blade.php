@@ -63,7 +63,7 @@
                 >
                     <x-fas-circle-notch wire:loading wire:target="checkIn" class="w-4 h-4 mr-2 animate-spin"/>
                     <x-fas-sign-in-alt wire:loading.remove wire:target="checkIn" class="w-4 h-4 mr-2"/>
-                    Masuk (Terlambat)
+                    Masuk (Telat)
                 </x-button-danger>
             @endif
         @endif
@@ -72,15 +72,6 @@
         @if ($now >= $checkout_start && $now <= $checkout_end)
             @if ($todayCheckOut)
                 <x-button-primary class="opacity-50"> Sudah Presensi </x-button-primary>
-            @elseif ($now < $checkout_time)
-                <x-button-danger wire:click="checkOut"
-                    wire:loading.attr="disabled"
-                    wire:target="confirm"
-                >
-                    <x-fas-circle-notch wire:loading wire:target="confirm" class="w-4 h-4 mr-2 animate-spin"/>
-                    <x-fas-sign-out-alt wire:loading.remove wire:target="confirm" class="w-4 h-4 mr-2"/>
-                    Pulang (Pulang Awal)
-                </x-button-danger>
             @else
                 <x-button-primary wire:click="checkOut"
                     wire:loading.attr="disabled"
@@ -88,7 +79,7 @@
                 >
                     <x-fas-circle-notch wire:loading wire:target="confirm" class="w-4 h-4 mr-2 animate-spin"/>
                     <x-fas-sign-out-alt wire:loading.remove wire:target="confirm" class="w-4 h-4 mr-2"/>
-                    Pulang (Tepat Waktu)
+                    Pulang 
                 </x-button-primary>
             @endif
         @endif

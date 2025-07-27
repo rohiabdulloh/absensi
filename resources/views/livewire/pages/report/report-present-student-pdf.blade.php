@@ -15,20 +15,18 @@
         </style>
     </head>
     <body>
-        <div class="title">LAPORAN DATA PRESENSI SISWA</div>
-        @if($classname != '-')  
-        <div class="title">KELAS {{$classname}}</div>
+        <div class="title">LAPORAN DATA PRESENSI</div>
+        @if($student)  
+        <div class="title">{{$student->name ?? ''}}</div>
         @endif
         <div class="subtitle">
-            Tanggal {{date('d-m-Y', strtotime($date))}} 
+            Bulan {{$month}} 
         </div>
         <table>
             <thead>
                 <tr>
                     <th>NO</th>
-                    <th>NIS</th>
-                    <th>Nama Siswa</th>
-                    <th>Kelas</th>
+                    <th>Tanggal</th>
                     <th>Masuk</th>
                     <th>Pulang</th>
                     <th>Keterangan</th>
@@ -38,12 +36,10 @@
             @foreach($datareport as $data)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
-                    <td>{{ $data['student_nis'] }}</td>
-                    <td>{{ $data['student_name'] }}</td>
-                    <td>{{ $data['class_name'] }}</td>
-                    <td>{{ $data['check_in'] }}</td>
-                    <td>{{ $data['check_out'] }}</td>
-                    <td>{{ $data['status'] }}</td>
+                    <td>{{  \Carbon\Carbon::parse($data['date'])->translatedFormat('l, d F Y')}}</td>
+                    <td style="text-align: center;">{{ $data['check_in'] }}</td>
+                    <td style="text-align: center;">{{ $data['check_out'] }}</td>
+                    <td style="text-align: center;">{{ $data['status'] }}</td>
                 </tr>
             @endforeach
             </tbody>

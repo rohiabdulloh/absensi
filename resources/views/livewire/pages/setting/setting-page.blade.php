@@ -14,16 +14,15 @@
                 <x-input inline="false" label="Jam Masuk" model="checkin_time" type="time" />
                 <x-input inline="false" label="Batas Awal Presensi Masuk" model="checkin_start" type="time" />
                 <x-input inline="false" label="Batas Akhir Presensi Masuk" model="checkin_end" type="time" />
+            </div>
+            
+            <div class="flex flex-col space-y-2">
+                <x-input inline="false" label="Batas Awal Presensi Pulang" model="checkout_start" type="time" />
+                <x-input inline="false" label="Batas Akhir Presensi Pulang" model="checkout_end" type="time" />
                 <x-select inline="false" label="Sabtu Libur" model="saturday_off">
                     <option value="Y">Ya</option>
                     <option value="N">Tidak</option>
                 </x-select>
-            </div>
-            
-            <div class="flex flex-col space-y-2">
-                <x-input inline="false" label="Jam Pulang" model="checkout_time" type="time" />
-                <x-input inline="false" label="Batas Awal Presensi Pulang" model="checkout_start" type="time" />
-                <x-input inline="false" label="Batas Akhir Presensi Pulang" model="checkout_end" type="time" />
             </div>
         </div>
 

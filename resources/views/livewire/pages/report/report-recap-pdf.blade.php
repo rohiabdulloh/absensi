@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <head>
-        <title>Laporan Data Presensi</title>
+        <title>Laporan Rekap Absensi Siswa</title>
         <style>
             body{font-family: Arial, sans-serif; font-size: 12pt;}
             table{border-collapse: collapse; width: 100%;}
@@ -15,7 +15,7 @@
         </style>
     </head>
     <body>
-        <div class="title">LAPORAN DATA PRESENSI SISWA</div>
+        <div class="title">LAPORAN REKAP ABSENSI SISWA</div>
         @if($classname != '-')  
         <div class="title">KELAS {{$classname}}</div>
         @endif
@@ -29,9 +29,10 @@
                     <th>NIS</th>
                     <th>Nama Siswa</th>
                     <th>Kelas</th>
-                    <th>Masuk</th>
-                    <th>Pulang</th>
-                    <th>Keterangan</th>
+                    <th>Izin</th>
+                    <th>Sakit</th>
+                    <th>Alfa</th>
+                    <th>Terlambat</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,9 +42,10 @@
                     <td>{{ $data['student_nis'] }}</td>
                     <td>{{ $data['student_name'] }}</td>
                     <td>{{ $data['class_name'] }}</td>
-                    <td>{{ $data['check_in'] }}</td>
-                    <td>{{ $data['check_out'] }}</td>
-                    <td>{{ $data['status'] }}</td>
+                    <td>{{ $data['izin'] }}</td>
+                    <td>{{ $data['sakit'] }}</td>
+                    <td>{{ $data['alfa'] }}</td>
+                    <td>{{ $data['terlambat'] }}</td>
                 </tr>
             @endforeach
             </tbody>

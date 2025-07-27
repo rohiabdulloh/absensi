@@ -11,7 +11,6 @@ class SettingPage extends Component
     public $checkin_time;
     public $checkin_start;
     public $checkin_end;
-    public $checkout_time;
     public $checkout_start;
     public $checkout_end;
     public $saturday_off;
@@ -21,7 +20,6 @@ class SettingPage extends Component
         $this->checkin_time = Setting::getValue('checkin_time');
         $this->checkin_start = Setting::getValue('checkin_start');
         $this->checkin_end = Setting::getValue('checkin_end');
-        $this->checkout_time = Setting::getValue('checkout_time');
         $this->checkout_start = Setting::getValue('checkout_start');
         $this->checkout_end = Setting::getValue('checkout_end');
         $this->saturday_off = Setting::getValue('saturday_off');
@@ -36,7 +34,6 @@ class SettingPage extends Component
         Setting::setValue('checkin_time', $this->checkin_time);
         Setting::setValue('checkin_start', $this->checkin_start);
         Setting::setValue('checkin_end', $this->checkin_end);
-        Setting::setValue('checkout_time', $this->checkout_time);
         Setting::setValue('checkout_start', $this->checkout_start);
         Setting::setValue('checkout_end', $this->checkout_end);
         Setting::setValue('saturday_off', $this->saturday_off);
