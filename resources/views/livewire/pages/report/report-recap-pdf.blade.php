@@ -20,7 +20,7 @@
         <div class="title">KELAS {{$classname}}</div>
         @endif
         <div class="subtitle">
-            Tanggal {{date('d-m-Y', strtotime($date))}} 
+            Tanggal {{date('d-m-Y', strtotime($date_start))}} s/d {{date('d-m-Y', strtotime($date_end))}} 
         </div>
         <table>
             <thead>
@@ -42,10 +42,10 @@
                     <td>{{ $data['student_nis'] }}</td>
                     <td>{{ $data['student_name'] }}</td>
                     <td>{{ $data['class_name'] }}</td>
-                    <td>{{ $data['izin'] }}</td>
-                    <td>{{ $data['sakit'] }}</td>
-                    <td>{{ $data['alfa'] }}</td>
-                    <td>{{ $data['terlambat'] }}</td>
+                    <td style="text-align: center;">{{ $data['izin'] }}</td>
+                    <td style="text-align: center;">{{ $data['sakit'] }}</td>
+                    <td style="text-align: center;">{{ $data['alfa'] }}</td>
+                    <td style="text-align: center;">{{ $data['terlambat'] }}</td>
                 </tr>
             @endforeach
             </tbody>

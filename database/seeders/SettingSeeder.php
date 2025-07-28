@@ -19,6 +19,7 @@ class SettingSeeder extends Seeder
             ['key' => 'checkout_end', 'value' => '16:00'],
 
             ['key' => 'saturday_off', 'value' => 'Y'],
+            ['key' => 'wa_message', 'value' => ''],
         ]);
     }
 }

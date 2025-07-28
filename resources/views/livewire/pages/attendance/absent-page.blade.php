@@ -1,13 +1,13 @@
 <div class="flex flex-col space-y-3">
     <x-breadcrumbs>
         <x-breadcrumbs-link>Presensi</x-breadcrumbs-link>
-        <x-breadcrumbs-link current="true">Siswa Alfa</x-breadcrumbs-link>
+        <x-breadcrumbs-link current="true">Siswa Absen</x-breadcrumbs-link>
     </x-breadcrumbs>
 
-    <x-page-header> Data Siswa Alfa
+    <x-page-header> Data Siswa Absen
         
         <x-slot:button>
-            <x-button wireclick="sendWhatsapp" color="green">
+            <x-button wireclick="sendMessage" color="green">
                 <x-fab-whatsapp class="h-4 w-4 mr-2"/>
                 <span>Kirim Pesan Semua</span>
             </x-button>

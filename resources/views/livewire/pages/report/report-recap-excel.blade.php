@@ -6,18 +6,17 @@
         <table>
             <thead>
                 <tr>
-                    <th colspan="10" style="text-align: center; font-size: 16pt; font-weight: bold;">LAPORAN REKAP ABSENSI SISWA</th>
+                    <th colspan="8" style="text-align: center; font-size: 16pt; font-weight: bold;">LAPORAN REKAP ABSENSI SISWA</th>
                 </tr>
                 @if($classname!='-')                    
                     <tr>
-                        <th colspan="10" style="text-align: center; font-size: 16pt; font-weight: bold;">
-                            KELAS {{$classame}} 
+                        <th colspan="8" style="text-align: center; font-size: 16pt; font-weight: bold;">
+                            KELAS {{$classname}} 
                         </th>
                     </tr>
                 @endif
                 <tr>
-                <tr>
-                    <th colspan="10" style="text-align: center; font-size: 12pt; font-weight: bold;">
+                    <th colspan="8" style="text-align: center; font-size: 12pt; font-weight: bold;">
                         Tanggal {{date('d-m-Y', strtotime($date_start))}} s/d {{date('d-m-Y', strtotime($date_start))}}
                     </th>
                 </tr>
@@ -39,10 +38,10 @@
                     <td style="border: 1pt solid #000">{{ $data['student_nis'] }}</td>
                     <td style="border: 1pt solid #000">{{ $data['student_name'] }}</td>
                     <td style="border: 1pt solid #000">{{ $data['class_name'] }}</td>
-                    <td style="border: 1pt solid #000">{{ $data['izin'] }}</td>
-                    <td style="border: 1pt solid #000">{{ $data['sakit'] }}</td>
-                    <td style="border: 1pt solid #000">{{ $data['alfa'] }}</td>
-                    <td style="border: 1pt solid #000">{{ $data['terlambat'] }}</td>
+                    <td style="border: 1pt solid #000; text-align: center;">{{ $data['izin'] }}</td>
+                    <td style="border: 1pt solid #000; text-align: center;">{{ $data['sakit'] }}</td>
+                    <td style="border: 1pt solid #000; text-align: center;">{{ $data['alfa'] }}</td>
+                    <td style="border: 1pt solid #000; text-align: center;">{{ $data['terlambat'] }}</td>
                 </tr>
             @endforeach
             </tbody>

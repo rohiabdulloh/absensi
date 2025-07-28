@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status', 15);
             $table->integer('year');
             $table->integer('leave_id')->nullable();
+            $table->enum('msg_sent',['Y','N'])->nullable();
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class ReportRecapExport implements FromView, ShouldAutoSize
 
     public function view(): View
     {
-        return view('livewire.pages.report.report-absent-excel', [
+        return view('livewire.pages.report.report-recap-excel', [
             'date_start' => $this->date_start,
             'date_end' => $this->date_end,
             'classname' => $this->classname,

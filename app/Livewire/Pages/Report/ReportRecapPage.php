@@ -11,7 +11,7 @@ use App\Models\Period;
 use App\Models\Classroom;
 use App\Models\Student;
 
-use App\Exports\RaportRecapExport;
+use App\Exports\ReportRecapExport;
 use Maatwebsite\Excel\Facades\Excel;   
 use PDF;
 
@@ -63,7 +63,7 @@ class ReportRecapPage extends Component
     {
         $class = Classroom::find($this->class);
         $classname = $class->name ?? '-';
-        $excel = new RaportRecapExport($this->date_start,$this->date_end, $classname, $this->year, $datareport);
+        $excel = new ReportRecapExport($this->date_start,$this->date_end, $classname, $this->year, $datareport);
         return Excel::download($excel, 'Laporan Rekap Presensi Siwsa.xlsx');
     }
 

@@ -82,9 +82,10 @@ class AbsentTable extends DataTableComponent
             Column::make("Status")
                 ->label(function ($row) {
                     if (!is_null($row->attendance_status)) {
-                        return "<span class='bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded'>Terkirim</span>";
+                        if($row->msg_sent=='Y') return "<span class='bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded'>Terkirim</span>";
+                        else return "<span class='bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded'>Tidak Terkirim</span>";
                     } else {
-                        return "<span class='bg-yellow-500 text-white text-xs font-semibold px-2 py-1 rounded'>Belum</span>";
+                        return "<span class='bg-gray-500 text-white text-xs font-semibold px-2 py-1 rounded'>Belum Terkirim</span>";
                     }
                 })
                 ->html()

@@ -4,23 +4,23 @@ const setupDashboard = () => {
     const pieChart = new Chart(document.getElementById('pieChart').getContext('2d'), {
         type: 'bar',
         data: {
-            labels: [1,2,3,4,5,6,8,9,10],
+            labels:  @json($label),
             datasets: [
                 {
                     label: 'Sakit',
-                    data: [32, 20, 30, 50, 40, 39, 30, 50, 40, 39],
-                    backgroundColor: 'rgb(221, 139, 31)',
+                    data: @json($sakit),
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'  
                 },
                 {
-                    label: 'Ijin',
-                    data: [32, 20, 39, 30, 50, 40, 39,30, 50, 40],
-                    backgroundColor: 'rgb(196, 45, 241)',
+                    label: 'Izin',
+                    data: @json($izin),
+                    backgroundColor: 'rgba(153, 102, 255, 0.6)'
                 },
                 {
-                    label: 'Tanpa Keterangan',
-                    data: [32, 30, 50, 40, 39, 20, 30, 50, 40, 39],
-                    backgroundColor: 'rgb(196, 41, 21)',
-                },
+                    label: 'Alfa',
+                    data: @json($alfa),
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                }
             ],
         },
         options: {
@@ -32,20 +32,5 @@ const setupDashboard = () => {
         }
     })
 
-    const barChart = new Chart(document.getElementById('barChart').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: @json($label),
-            datasets: @json($chart),
-        },
-        options: {
-            scales: {
-                y: { beginAtZero: true }
-            },
-            legend: {
-                display: false,
-            },
-        }
-    })
 };
 </script>
