@@ -51,6 +51,7 @@ class DashboardPage extends Component
                 'students.nis as student_nis',
                 'students.name as student_name',
                 'classrooms.name as class_name',
+                'attendances.status as attendance_status',
             )
             ->join('student_classes', function ($join) use ($year) {
                 $join->on('students.id', '=', 'student_classes.student_id')
@@ -60,14 +61,14 @@ class DashboardPage extends Component
             ->leftJoin('attendances', function ($join) use ($today) {
                 $join->on('students.id', '=', 'attendances.student_id')
                      ->whereDate('attendances.date', $today);
-            })
-            ->where(function ($query) {
-                $query->whereNull('attendances.id')
-                      ->orWhere('attendances.status', 'A');
             });
+            
 
-        $absentCount = $absent->count();
-        $absentStudents = $absent->limit(10)->get();
+        $absentCount = $absent->whereNull('attendances.id')->count();
+
+        $absentStudents = $absent->whereNotNull('attendances.id')
+            ->whereNull('attendances.check_in')
+            ->whereNull('attendances.check_out')->get();
 
         //Data widget        
         $leaveCount = Leave::where('status', 'Menunggu')->count();
@@ -80,11 +81,11 @@ class DashboardPage extends Component
                 'link'=>'/admin/guru',
                 'data' => Teacher::count()
             ],
-            ['label'=>'Pengajuan Ijin', 'color'=>'bg-amber-500', 'icon'=>'fas-envelope', 'label-color'=>'bg-amber-400', 
-                'link'=>'/admin/presensi/ijin',
+            ['label'=>'Pengajuan Izin', 'color'=>'bg-amber-500', 'icon'=>'fas-envelope', 'label-color'=>'bg-amber-400', 
+                'link'=>'/admin/presensi/izin',
                 'data' => $leaveCount
             ],
-            ['label'=>'Siswa Absen', 'color'=>'bg-green-500', 'icon'=>'fas-user-times', 'label-color'=>'bg-green-400', 
+            ['label'=>'Siswa Belum Presensi', 'color'=>'bg-red-500', 'icon'=>'fas-user-times', 'label-color'=>'bg-green-400', 
                 'link'=>'/admin/presensi/absen',
                 'data' => $absentCount
             ],

@@ -14,9 +14,9 @@
       </x-nav-bottom>
 
       <!-- Notifications Button -->
-      <x-nav-bottom link="/siswa/ijin">
+      <x-nav-bottom link="/siswa/izin">
         <x-fas-envelope class="w-5 h-5"/>
-        <span class="text-xs">Ijin</span>
+        <span class="text-xs">Izin</span>
       </x-nav-bottom>
 
       <!-- Profile Button -->

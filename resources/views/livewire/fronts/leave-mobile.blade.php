@@ -2,7 +2,7 @@
 <div class="block md:hidden space-y-6">
     @foreach ($leaves as $item)
         @php
-            $leaveType = $item->type == 'S' ? 'Sakit' : 'Ijin';
+            $leaveType = $item->type == 'S' ? 'Sakit' : 'Izin';
             $statusClass = '';
             if($item->status == 'Disetujui') {
                 $statusClass = 'text-green-500 font-bold';
@@ -42,7 +42,7 @@
 
             <!-- Tipe Cuti -->
             <div class="flex justify-between items-center border-b pb-4 mb-4 border-gray-200 dark:border-gray-600">
-                <span class="text-sm text-gray-500 dark:text-gray-400">Tipe Ijin</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">Tipe Izin</span>
                 <span class="text-base font-medium">{{ $leaveType }}</span>
             </div>
 

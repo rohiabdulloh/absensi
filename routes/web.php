@@ -52,7 +52,7 @@ Route::middleware(['auth','role:superadmin'])->prefix('/admin')->group(function(
 
     Route::get('/presensi', AttendancePage::class)->name('attendance');
     Route::get('/presensi/absen', AbsentPage::class)->name('absent');
-    Route::get('/presensi/ijin', LeavePage::class)->name('leave');
+    Route::get('/presensi/izin', LeavePage::class)->name('leave');
 
      
     Route::get('/laporan/presensi', ReportPresentPage::class)->name('report.present'); 
@@ -81,7 +81,7 @@ Route::middleware(['auth','role:guru'])->prefix('/guru')->group(function(){
 
 Route::middleware(['auth','role:siswa'])->prefix('/siswa')->group(function(){        
     Route::get('/rekap', ReportPage::class)->name('student.report');
-    Route::get('/ijin', FrontLeavePage::class)->name('student.leave');
+    Route::get('/izin', FrontLeavePage::class)->name('student.leave');
 });
 
 

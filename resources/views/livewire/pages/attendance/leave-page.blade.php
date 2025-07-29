@@ -1,10 +1,10 @@
 <div class="flex flex-col space-y-3">
     <x-breadcrumbs>
         <x-breadcrumbs-link>Presensi</x-breadcrumbs-link>
-        <x-breadcrumbs-link current="true">Siswa Ijin</x-breadcrumbs-link>
+        <x-breadcrumbs-link current="true">Siswa Izin</x-breadcrumbs-link>
     </x-breadcrumbs>
 
-    <x-page-header> Data Siswa Ijin
+    <x-page-header> Data Siswa Izin
         <x-slot:button>                   
            
         </x-slot>

@@ -72,7 +72,7 @@ class AbsentPage extends Component
                 ];
                 Attendance::create($attendanceData);
             }else{
-                if($this->sendWhatsapp($student->parrent_hp, $student->name)) $existing->update(['msg_sent'=>'Y'])
+                if($this->sendWhatsapp($student->parrent_hp, $student->name)) $existing->update(['msg_sent'=>'Y']);
             }
         }
         
@@ -84,8 +84,9 @@ class AbsentPage extends Component
         $this->year = $activePeriod ? $activePeriod->year_start : date('Y');
     }
 
-    private function sendWhatsapp($hp, $name)
+    private function sendWhatsapp($hp, $name){  
         $message = Setting::getValue('wa_message');
+        $message = str_replace('[nama]', $name, $message);
         
         $telepon  = str_replace('+62', '62', $hp);
        

@@ -44,7 +44,7 @@
                 </x-slot>
                 <x-menu-sub link="/admin/presensi">Data Presensi</x-menu-sub>
                 <x-menu-sub link="/admin/presensi/absen">Data Siswa Absen</x-menu-sub>
-                <x-menu-sub link="/admin/presensi/ijin">Data Pengajuan Ijin</x-menu-sub>
+                <x-menu-sub link="/admin/presensi/izin">Data Pengajuan Izin</x-menu-sub>
             </x-menu-dropdown>   
 
             

@@ -29,26 +29,25 @@
 
         <div class="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-4">            
             <div class="md:col-span-3">   
-                <div class="rounded-md bg-white dark:bg-gray-800">
+                <div class="h-full rounded-md bg-white dark:bg-gray-800">
                     <div class="flex flex-row items-center p-4 space-x-3">
                         <x-fas-house-user class="w-5 h-5"/> <span class="text-lg"> Data siswa Absen</span>
                     </div>
-                    <div class="py-8 px-8 md:px-32">
+                    <div class="py-8 px-8 md:px-32" style="max-height: 600px;">
                         <canvas id="pieChart"></canvas>
                     </div>
                 </div>
             </div>
             <div>   
-                <div class="rounded-md bg-white dark:bg-gray-800">
+                <div class="h-full rounded-md bg-white dark:bg-gray-800">
                     <div class="flex flex-col p-4 justify-between">
                         <div class="flex flex-row items-center space-x-3">
                             <x-fas-user-times class="w-5 h-5"/> <span class="text-lg"> Siswa Absen Hari Ini </span>
                         </div>
-                        <div class="flex flex-col space-x-3">
+                        <div class="mt-4 flex-1 overflow-y-auto px-4 pr-2" style="max-height: 600px;">
                         @include('livewire.app.absent-list')
                         </div>
                     </div>
-                    <div class="h-60"></div>
                 </div>
             </div>
         </div>

@@ -5,13 +5,13 @@
             <th scope="col" class="px-6 py-3">Tanggal Pengajuan</th>
             <th scope="col" class="px-6 py-3">Tanggal Mulai</th>
             <th scope="col" class="px-6 py-3">Tanggal Selesai</th>
-            <th scope="col" class="px-6 py-3">Tipe Ijin</th>
+            <th scope="col" class="px-6 py-3">Tipe Izin</th>
             <th scope="col" class="px-6 py-3 text-center">Status</th>
             <th scope="col" class="px-6 py-3 text-center">Aksi</th>
         </x-slot:thead>
         @forelse ($leaves as $item)
             @php
-                $leaveType = $item->type == 'S' ? 'Sakit' : 'Ijin';
+                $leaveType = $item->type == 'S' ? 'Sakit' : 'Izin';
                 $statusClass = '';
                 if($item->status == 'Disetujui') {
                     $statusClass = 'text-green-500 font-bold';

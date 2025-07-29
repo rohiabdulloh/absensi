@@ -24,9 +24,9 @@
                 <span class="ml-2 text-sm"> Rekap Presensi</span>
             </x-menu>  
 
-            <x-menu link="/siswa/ijin">
+            <x-menu link="/siswa/izin">
                 <x-fas-envelope class="h-5 w-5"/>    
-                <span class="ml-2 text-sm"> Ijin </span>
+                <span class="ml-2 text-sm"> Izin </span>
             </x-menu>  
 
             

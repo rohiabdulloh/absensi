@@ -27,6 +27,8 @@ class HomePage extends Component
     public $checkout_start;
     public $checkout_end;
 
+    public $isLocal = false;
+
     public function mount()
     {
         $this->setYear();
@@ -35,6 +37,8 @@ class HomePage extends Component
         $this->checkin_end = Carbon::createFromFormat('H:i', Setting::getValue('checkin_end'))->format('H:i:s');
         $this->checkout_start = Carbon::createFromFormat('H:i', Setting::getValue('checkout_start'))->format('H:i:s');
         $this->checkout_end = Carbon::createFromFormat('H:i', Setting::getValue('checkout_end'))->format('H:i:s');
+
+        $this->isLocal = $this->isLocalNetwork();
     }
 
     public function render()
@@ -70,7 +74,17 @@ class HomePage extends Component
         return view('livewire.fronts.home-page')->layout('layouts.app');
     }
 
-    
+    function isLocalNetwork()
+    {
+        $ip = request()->ip();
+        return (
+            preg_match('/^10\./', $ip) ||
+            preg_match('/^192\.168\./', $ip) ||
+            preg_match('/^172\.(1[6-9]|2[0-9]|3[0-1])\./', $ip) ||
+            $ip === '127.0.0.1'
+        );
+    }
+
     public function checkIn()
     {
         $student = Student::where('user_id', Auth::user()->id)->first();

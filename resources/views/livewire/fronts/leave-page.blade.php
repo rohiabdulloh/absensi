@@ -1,5 +1,5 @@
 <div class="flex flex-col space-y-3">
-    <x-page-header dropdownWidth="64"> Pengajuan Ijin Tidak Masuk
+    <x-page-header dropdownWidth="64"> Pengajuan Izin Tidak Masuk
         <x-slot:button>
             <x-button-primary @click="isModalOpen = true" class="mt-3 md:mt-0">
                 <x-fas-plus-circle class="h-4 w-4 mr-2"/>
@@ -18,7 +18,7 @@
         <form wire:submit.prevent="save">
             <x-modal class="md:w-1/2">
                 <x-slot name="header">
-                    <h3>{{ $isEdit ? 'Edit' : 'Ajukan' }} Ijin Tidak Masuk</h3>
+                    <h3>{{ $isEdit ? 'Edit' : 'Ajukan' }} Izin Tidak Masuk</h3>
                 </x-slot>
                 <div class="flex flex-col space-y-4">
                     <x-input-date label="Tanggal Mulai*" model="date_start" inline="false" />
