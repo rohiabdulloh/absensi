@@ -1,9 +1,11 @@
 <a wire:navigate
     href="{{ $link }}"
     role="menuitem"
-    class="block p-2 text-sm text-gray-500 transition-colors duration-200 rounded-md 
-        dark:text-gray-200 dark:hover:text-light hover:text-gray-900 hover:font-bold
-        {!! request()->is(str_replace('/','',$link)) ? 'text-gray-900 dark:text-white font-bold' : '' !!}" 
+    class="flex items-center gap-2 px-4 py-3 text-sm transition duration-300 
+        text-gray-600 dark:text-gray-300 
+        hover:text-blue-800 hover:bg-blue-100 dark:hover:bg-blue-800 
+        {{ request()->is(ltrim($link, '/')) ? 'bg-blue-100 text-blue-800 dark:bg-blue-800 dark:text-white font-semibold' : '' }}"
 >
-    {{ $slot }}
+    <x-fas-angle-right class="h-3 w-3"/>
+    <span>{{ $slot }}</span>
 </a>

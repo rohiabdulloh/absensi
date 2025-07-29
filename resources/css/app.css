@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Kustom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px; /* Lebar scrollbar */
+    height: 8px; /* Lebar scrollbar */
+ }
+
+ ::-webkit-scrollbar-track {
+    background-color: #f1f1f1; /* Warna latar belakang track scrollbar */
+ }
+
+ ::-webkit-scrollbar-thumb {
+    background-color: #aaaaaa; /* Warna thumb scrollbar */
+    border-radius: 10px; /* Membuat thumb dengan sudut melengkung */
+ }
+
+ ::-webkit-scrollbar-thumb:hover {
+    background-color: #888888; /* Warna thumb saat hover */
+ }
+
+ .dark ::-webkit-scrollbar-track {
+    background-color: #4b5563; /* Warna track di mode gelap */
+ }
+
+ .dark ::-webkit-scrollbar-thumb {
+    background-color: #374151; /* Warna thumb di mode gelap */
+    border-radius: 10px;
+ }
+
+ .dark ::-webkit-scrollbar-thumb:hover {
+    background-color: #030712; /* Warna thumb saat hover di mode gelap */
+ }
+
+ /* Untuk Firefox */
+ * {
+    scrollbar-width: thin; /* Mengatur lebar scrollbar */
+    scrollbar-color: #aaaaaa #f1f1f1; /* Warna untuk mode terang */
+ }
+
+ .dark * {
+    scrollbar-color: #1f2937 #4b5563; /* Warna untuk mode gelap */
+ }

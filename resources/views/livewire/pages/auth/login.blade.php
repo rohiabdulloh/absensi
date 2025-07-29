@@ -27,30 +27,49 @@ new #[Layout('layouts.guest')] class extends Component
     }
 }; ?>
 
-<div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100
-        dark:bg-gray-900 dark:text-light">
-    <div class="w-full sm:max-w-md mt-6 mb-6 px-6 py-8 bg-white shadow-md overflow-hidden sm:rounded-lg
-        dark:bg-gray-800">
-        <div class="flex justify-center pb-8">            
-            <img src="{{asset('storage/setting/logo.png')}}" width="200"/>
-        </div>
-    
-<div>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+<div class="min-h-screen flex flex-col items-center justify-center px-4">
+    <!-- Logo -->
+    <div class="mb-6">
+        <img src="{{ asset('storage/setting/logo.png') }}" alt="Logo" class="w-48 mx-auto drop-shadow-md">
+    </div>
 
-    <form wire:submit="login">
-        <div class="flex flex-col space-y-3">
-            <x-input label="Email/NIS/NIP" model="form.email" inline="false"/>
-            <x-input type="password" label="Password" model="form.password" inline="false"/>
-            <label for="remember" class="inline-flex items-center">
-                <input wire:model="form.remember" id="remember" type="checkbox" class="rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm">{{ __('Remember me') }}</span>
-            </label>
-            <x-button-primary type="submit">Login</x-button-primary>
+    <!-- Card -->
+    <div class="w-full sm:max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+        <div class="px-6 py-8">
+            <!-- Judul -->
+            <h2 class="text-2xl font-bold text-center text-gray-800 dark:text-white mb-6">
+                Selamat Datang
+            </h2>
+
+            <!-- Session Status -->
+            <x-auth-session-status class="mb-4" :status="session('status')" />
+
+            <!-- Form -->
+            <form wire:submit="login" class="space-y-4">
+                <!-- Email/NIS/NIP -->
+                <x-input label="Email / NIS / NIP" model="form.email" inline="false" />
+
+                <!-- Password -->
+                <x-input type="password" label="Password" model="form.password" inline="false" />
+
+                <!-- Remember Me -->
+                <label class="inline-flex items-center text-sm text-gray-600 dark:text-gray-300">
+                    <input wire:model="form.remember" type="checkbox"
+                        class="rounded border-gray-300 dark:bg-gray-700 dark:border-gray-600 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                    <span class="ml-2">Ingat saya</span>
+                </label>
+
+                <!-- Submit -->
+                <x-button-primary type="submit" class="w-full mt-4">
+                    Masuk
+                </x-button-primary>
+            </form>
+
         </div>
-    </form>
+    </div>
+
+    <!-- Footer (optional) -->
+    <div class="mt-6 text-sm text-gray-500 dark:text-gray-400">
+        &copy; {{ date('Y') }} Sekolah Anda. Semua hak dilindungi.
+    </div>
 </div>
-
-    </div>      
-</div>      

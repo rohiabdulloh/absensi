@@ -14,23 +14,23 @@
         <!-- Sidebar links -->
         <nav aria-label="Main" class="flex-1 px-2 py-4 space-y-2">
          
-            <x-menu link="/">
+            <x-menu class="py-4 px-3" link="/">
                 <x-fas-home class="h-5 w-5"/>    
                 <span class="ml-2 text-sm"> Beranda </span>
             </x-menu>  
             
-            <x-menu link="/siswa/rekap">
+            <x-menu class="py-4 px-3" link="/siswa/rekap">
                 <x-fas-calendar-check class="h-5 w-5"/>    
                 <span class="ml-2 text-sm"> Rekap Presensi</span>
             </x-menu>  
 
-            <x-menu link="/siswa/izin">
+            <x-menu class="py-4 px-3" link="/siswa/izin">
                 <x-fas-envelope class="h-5 w-5"/>    
                 <span class="ml-2 text-sm"> Izin </span>
             </x-menu>  
 
             
-            <x-menu link="/profil">
+            <x-menu class="py-4 px-3" link="/profil">
                 <x-fas-user-circle class="h-5 w-5"/>    
                 <span class="ml-2 text-sm"> Profil</span>
             </x-menu>  
