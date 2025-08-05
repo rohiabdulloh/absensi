@@ -31,6 +31,9 @@ use App\Livewire\Pages\Report\ReportRecapPage;
 use App\Livewire\Fronts\ReportPage;
 use App\Livewire\Fronts\FrontLeavePage;
 
+use App\Livewire\Teachers\StudentAttendance;
+use App\Livewire\Teachers\ReportAttendance;
+
 Route::group(['middleware'=>'auth'], function(){     
     Route::get('/', DashboardPage::class)->name('home');
     Route::get('/dashboard', DashboardPage::class)->name('dashboard');
@@ -62,21 +65,10 @@ Route::middleware(['auth','role:superadmin'])->prefix('/admin')->group(function(
     Route::get('/laporan/rekap_presensi', ReportRecapPage::class)->name('report.recap'); 
 });
 
-
-Route::middleware(['auth','role:kepsek'])->prefix('/kepsek')->group(function(){    
-    //
-});
-
-Route::middleware(['auth','role:kesiswaan'])->prefix('/kesiswaan')->group(function(){    
-    //
-});
-
-Route::middleware(['auth','role:bk'])->prefix('/bk')->group(function(){    
-    //
-});
-
 Route::middleware(['auth','role:guru'])->prefix('/guru')->group(function(){    
-    //
+    
+    Route::get('/presensi', StudentAttendance::class)->name('teacher.attendance');
+    Route::get('/rekap', ReportAttendance::class)->name('teacher.report');
 });
 
 Route::middleware(['auth','role:siswa'])->prefix('/siswa')->group(function(){        

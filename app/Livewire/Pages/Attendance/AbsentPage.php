@@ -46,9 +46,10 @@ class AbsentPage extends Component
     }
 
     #[On('send-message')]
-    public function sendMessageSelected($studentids){
-        $students = Student::whereIn('id', $studentids)->get();
-
+    public function sendMessageSelected($id){
+        if(!is_array($id)) $id = [$id];
+        $students = Student::whereIn('id', $id)->get();
+   
         $this->insertAttendance($students);
     }
 
@@ -72,7 +73,9 @@ class AbsentPage extends Component
                 ];
                 Attendance::create($attendanceData);
             }else{
-                if($this->sendWhatsapp($student->parrent_hp, $student->name)) $existing->update(['msg_sent'=>'Y']);
+                if($existing->msg_sent !== 'Y' && $this->sendWhatsapp($student->parent_hp, $student->name)){
+                    $existing->update(['msg_sent'=>'Y']);
+                }
             }
         }
         
@@ -88,7 +91,7 @@ class AbsentPage extends Component
         $message = Setting::getValue('wa_message');
         $message = str_replace('[nama]', $name, $message);
         
-        $telepon  = str_replace('+62', '62', $hp);
+        $telepon  = $this->formatNomorHP($hp);
        
         $curl = curl_init();
         $token = env('WABLAS_APIKEY');
@@ -97,6 +100,7 @@ class AbsentPage extends Component
             'phone' => $telepon,
             'message' => $message,
         ];
+        dd($data);
         curl_setopt($curl, CURLOPT_HTTPHEADER,
             array(
                 "Authorization: $token.$secret_key",
@@ -112,10 +116,32 @@ class AbsentPage extends Component
         curl_close($curl);
         
         $data = json_decode($result, true);
-    
+        
         if (!is_array($data) || !isset($data['status']) || $data['status'] !== true) {
             return false;
         }
         return true;
+    }
+    
+    function formatNomorHP($nomor) {
+        // Hilangkan spasi, tanda +, dan karakter non-digit
+        $nomor = preg_replace('/\D/', '', $nomor);
+    
+        // Kalau diawali 0 → ganti jadi 62
+        if (substr($nomor, 0, 1) === '0') {
+            return '62' . substr($nomor, 1);
+        }
+        // Kalau diawali 62 → biarkan
+        elseif (substr($nomor, 0, 2) === '62') {
+            return $nomor;
+        }
+        // Kalau diawali 8 → tambahkan 62 di depan
+        elseif (substr($nomor, 0, 1) === '8') {
+            return '62' . $nomor;
+        }
+        // Selain itu → kembalikan apa adanya
+        else {
+            return $nomor;
+        }
     }
 }

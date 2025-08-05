@@ -14,6 +14,7 @@ class SettingPage extends Component
     public $checkout_start;
     public $checkout_end;
     public $saturday_off;
+    public $wa_message;
 
     public function mount()
     {
@@ -23,6 +24,7 @@ class SettingPage extends Component
         $this->checkout_start = Setting::getValue('checkout_start');
         $this->checkout_end = Setting::getValue('checkout_end');
         $this->saturday_off = Setting::getValue('saturday_off');
+        $this->wa_message = Setting::getValue('wa_message');
     }
 
     public function render()
@@ -37,6 +39,7 @@ class SettingPage extends Component
         Setting::setValue('checkout_start', $this->checkout_start);
         Setting::setValue('checkout_end', $this->checkout_end);
         Setting::setValue('saturday_off', $this->saturday_off);
+        Setting::setValue('wa_message', $this->wa_message);
         $this->dispatch('show-message', msg:'Pengaturan berhasil disimpan');   
     }
 }

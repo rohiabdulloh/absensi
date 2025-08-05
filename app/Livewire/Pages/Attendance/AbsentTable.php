@@ -23,6 +23,10 @@ class AbsentTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
         $this->setDefaultSort('created_at', 'desc');
+
+        $this->setBulkActions([
+            'sendWa' => 'Kirim Pesan Whatsapp',
+        ]);
     }
 
     public function builder(): Builder
@@ -35,7 +39,8 @@ class AbsentTable extends DataTableComponent
                 'students.nis as student_nis',
                 'students.name as student_name',
                 'classrooms.name as class_name',
-                'attendances.status as attendance_status'
+                'attendances.status as attendance_status',
+                'attendances.msg_sent as attendance_msg_sent',
             )
             ->join('student_classes', function ($join) {
                 $join->on('students.id', '=', 'student_classes.student_id')
@@ -82,7 +87,7 @@ class AbsentTable extends DataTableComponent
             Column::make("Status")
                 ->label(function ($row) {
                     if (!is_null($row->attendance_status)) {
-                        if($row->msg_sent=='Y') return "<span class='bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded'>Terkirim</span>";
+                        if($row->attendance_msg_sent=='Y') return "<span class='bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded'>Terkirim</span>";
                         else return "<span class='bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded'>Tidak Terkirim</span>";
                     } else {
                         return "<span class='bg-gray-500 text-white text-xs font-semibold px-2 py-1 rounded'>Belum Terkirim</span>";
@@ -90,7 +95,15 @@ class AbsentTable extends DataTableComponent
                 })
                 ->html()
                 ->collapseOnMobile(),
+                
+            
+            Column::make("Aksi", "id")
+                ->view('livewire.pages.attendance.absent-action')->collapseOnMobile(),
         ];
     }
 
+    public function sendWa(){
+        $this->dispatch('send-message', $this->getSelected());
+        $this->clearSelected();
+    }
 }

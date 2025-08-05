@@ -11,10 +11,7 @@
         </x-slot>
     </x-page-header>
 
-    <x-card class="min-h-full">
-
         @include('livewire.fronts.report-desktop')
         @include('livewire.fronts.report-mobile')
 
-    </x-card>
 </div>

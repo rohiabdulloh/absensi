@@ -15,6 +15,7 @@ class Attendance extends Model
         'status',
         'year',
         'leave_id',
+        'msg_sent',
     ];
 
     public function student()

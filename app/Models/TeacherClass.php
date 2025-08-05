@@ -18,4 +18,10 @@ class TeacherClass extends Model
     {
         return $this->belongsTo(Teacher::class, 'teacher_id');
     }
+    
+    
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class, 'class_id');
+    }
 }

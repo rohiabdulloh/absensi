@@ -24,6 +24,10 @@
                     <option value="N">Tidak</option>
                 </x-select>
             </div>
+
+            <div class="col-span-2">
+                <x-input inline="false" label="Template Pesan Whatsap" model="wa_message" />
+            </div>
         </div>
 
         <x-alert/>

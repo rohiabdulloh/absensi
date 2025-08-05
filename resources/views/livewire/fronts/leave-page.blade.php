@@ -8,7 +8,6 @@
         </x-slot>
     </x-page-header>
 
-    <x-card class="min-h-full">
         {{-- Tabel dibuat di halaman lain --}}        
 
         @include('livewire.fronts.leave-desktop')
@@ -44,5 +43,4 @@
         {{-- Konfirmasi Hapus & Alert --}}
         <x-confirm-delete>Yakin akan menghapus pengajuan cuti?</x-confirm-delete>
         <x-alert />
-    </x-card>
 </div>

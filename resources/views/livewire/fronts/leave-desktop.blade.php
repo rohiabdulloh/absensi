@@ -1,5 +1,6 @@
 <!-- Tampilan di desktop -->
 <div class="hidden md:block">
+    <x-card class="min-h-full">
     <x-table>
         <x-slot:thead>
             <th scope="col" class="px-6 py-3">Tanggal Pengajuan</th>
@@ -52,4 +53,5 @@
             </tr>
         @endforelse
     </x-table>
+    </x-card>
 </div>

@@ -7,22 +7,20 @@
         <span class="text-xs">Home</span>
       </x-nav-bottom>
 
-      <!-- Search Button -->
-      <x-nav-bottom class="p-2" link="/siswa/rekap">
+      <x-nav-bottom class="p-2" link="/guru/presensi">
+        <x-fas-clipboard-check class="w-5 h-5"/>
+        <span class="text-xs">Presensi</span>
+      </x-nav-bottom>
+
+      <x-nav-bottom class="p-2" link="/guru/rekap">
         <x-fas-calendar-check class="w-5 h-5"/>
         <span class="text-xs">Rekap</span>
       </x-nav-bottom>
 
-      <!-- Notifications Button -->
-      <x-nav-bottom class="p-2" link="/siswa/izin">
-        <x-fas-envelope class="w-5 h-5"/>
-        <span class="text-xs">Izin</span>
-      </x-nav-bottom>
-
-      <!-- Profile Button -->
       <x-nav-bottom class="p-2" link="/profil">
         <x-fas-user-circle class="w-5 h-5"/>
         <span class="text-xs">Profil</span>
       </x-nav-bottom>
+
     </div>
 </div>

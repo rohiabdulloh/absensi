@@ -54,6 +54,10 @@
             @role('siswa')
                   @include('layouts.sidebar-student') 
             @endif
+            
+            @role('guru')
+                  @include('layouts.sidebar-teacher') 
+            @endif
 
             <!-- Main Content -->
             <div class="flex-1 overflow-hidden backdrop-blur-md bg-white/70 dark:bg-gray-900/80">
@@ -61,9 +65,9 @@
                      
                      <!-- Header -->
                      <header class="backdrop-blur bg-white/50 dark:bg-gray-800/50 shadow-sm sticky top-0 z-20">
-                        @if(Auth::user()->hasRole('siswa'))
+                        @if(Auth::user()->hasRole(['siswa', 'guru']))
                               @include('layouts.header-front')
-                        @elseif(Auth::user()->hasRole(['superadmin', 'guru']))
+                        @elseif(Auth::user()->hasRole('superadmin'))
                               @include('layouts.header')  
                         @endif            
                      </header>
@@ -76,7 +80,14 @@
                      <!-- Bottom Nav -->
                      @role('siswa')
                         <nav class="border-t border-gray-200 dark:border-gray-700">
-                              @include('layouts.bottom-navigation')
+                              @include('layouts.navigation-student')
+                        </nav>
+                     @endrole 
+
+                     
+                     @role('guru')
+                        <nav class="border-t border-gray-200 dark:border-gray-700">
+                              @include('layouts.navigation-teacher')
                         </nav>
                      @endrole 
 
