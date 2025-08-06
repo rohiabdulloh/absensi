@@ -14,17 +14,49 @@ class SettingPage extends Component
     public $checkout_start;
     public $checkout_end;
     public $saturday_off;
+
     public $wa_message;
+    public $wa_apikey;
+    public $wa_secretkey;
+
+    public $absen_latitude;
+    public $absen_longitude;
+    public $absen_radius;
+    public $absen_location;
+
+    protected $settingKeys = [
+        'checkin_time',
+        'checkin_start',
+        'checkin_end',
+        'checkout_start',
+        'checkout_end',
+        'saturday_off',
+        'wa_message',
+        'wa_apikey',
+        'wa_secretkey',
+        'absen_latitude',
+        'absen_longitude',
+        'absen_radius',
+        'absen_location',
+    ];
+
+    protected $rules = [
+        'checkin_time' => 'required',
+        'checkin_start' => 'required',
+        'checkin_end' => 'required',
+        'checkout_start' => 'required',
+        'checkout_end' => 'required',
+        'wa_message' => 'required',
+        'absen_latitude' => 'required|numeric',
+        'absen_longitude' => 'required|numeric',
+        'absen_radius' => 'required|integer|min:10',
+    ];
 
     public function mount()
     {
-        $this->checkin_time = Setting::getValue('checkin_time');
-        $this->checkin_start = Setting::getValue('checkin_start');
-        $this->checkin_end = Setting::getValue('checkin_end');
-        $this->checkout_start = Setting::getValue('checkout_start');
-        $this->checkout_end = Setting::getValue('checkout_end');
-        $this->saturday_off = Setting::getValue('saturday_off');
-        $this->wa_message = Setting::getValue('wa_message');
+        foreach ($this->settingKeys as $key) {
+            $this->{$key} = Setting::getValue($key);
+        }
     }
 
     public function render()
@@ -33,13 +65,12 @@ class SettingPage extends Component
     }
 
     public function save(){
-        Setting::setValue('checkin_time', $this->checkin_time);
-        Setting::setValue('checkin_start', $this->checkin_start);
-        Setting::setValue('checkin_end', $this->checkin_end);
-        Setting::setValue('checkout_start', $this->checkout_start);
-        Setting::setValue('checkout_end', $this->checkout_end);
-        Setting::setValue('saturday_off', $this->saturday_off);
-        Setting::setValue('wa_message', $this->wa_message);
+        $this->validate();
+
+        foreach ($this->settingKeys as $key) {
+            Setting::setValue($key, $this->{$key});
+        }
+
         $this->dispatch('show-message', msg:'Pengaturan berhasil disimpan');   
     }
 }

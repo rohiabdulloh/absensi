@@ -16,6 +16,8 @@
       <!-- Scripts -->
       @vite(['resources/css/app.css', 'resources/js/app.js'])
       <script src="{{ asset('js/theme.js') }}" defer></script>
+
+      @stack('styles')
    </head>
    <body>
       <div x-data="setup()" 
@@ -96,5 +98,7 @@
          </div>
       </div>
 
+      
+      @stack('scripts')
    </body>
 </html>
