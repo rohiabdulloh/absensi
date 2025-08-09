@@ -10,6 +10,7 @@ use App\Models\Period;
 use App\Models\Classroom;
 use App\Models\Student;
 use App\Models\Setting;
+use App\Models\SpecialDay;
 
 use App\Exports\ReportPresentstudentExport;
 use Maatwebsite\Excel\Facades\Excel;   
@@ -26,6 +27,7 @@ class ReportPresentStudentPage extends Component
     public $students = [];
     public $periods = [];
     public $datareport = [];
+    public $specialDays = [];
 
     public function mount(){
         $this->saturdayOff = Setting::getValue('saturday_off');
@@ -69,16 +71,24 @@ class ReportPresentStudentPage extends Component
             ->get()
             ->keyBy('date');
 
+        // Ambil tanggal spesial
+        $this->specialDays = SpecialDay::whereBetween('date', [$start->format('Y-m-d'), $end->format('Y-m-d')])
+            ->get()
+            ->keyBy('date');
+            
         $this->datareport = collect($dates)->map(function ($date) use ($attendances) {
             $record = $attendances[$date] ?? null;
+            $special = $this->specialDays[$date] ?? null;
 
             return [
                 'date' => $date,
                 'check_in' => $record->check_in ?? '-',
                 'check_out' => $record->check_out ?? '-',
                 'status' => $record->status ?? '-',
+                'special_day' => $special?->type ?? null,
             ];
         });
+
 
         return view('livewire.pages.report.report-present-student-page')->layout('layouts.app');
     }

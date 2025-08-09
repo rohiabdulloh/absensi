@@ -9,6 +9,7 @@ use App\Models\Period;
 use App\Models\Attendance;
 use App\Models\Student;
 use App\Models\Setting;
+use App\Models\SpecialDay;
 
 class ReportPage extends Component
 {
@@ -16,6 +17,7 @@ class ReportPage extends Component
     public $year;
     public $monthList = [];
     public $attendanceData = [];
+    public $specialDays = [];
     public $saturdayOff;
 
     public function mount()
@@ -60,25 +62,36 @@ class ReportPage extends Component
         $end = $start->copy()->endOfMonth();
         $student = Student::where('user_id', Auth::id())->first();
 
+        // Ambil daftar tanggal
         $dates = [];
         for ($date = $start->copy(); $date->lte($end); $date->addDay()) {
             $dates[] = $date->format('Y-m-d');
         }
 
+        // Ambil data absensi
         $attendances = Attendance::where('student_id', $student?->id)
             ->whereMonth('date', $this->month)
             ->whereYear('date', $this->year)
             ->get()
             ->keyBy('date');
 
+    // Ambil tanggal spesial
+    $this->specialDays = SpecialDay::whereBetween('date', [$start->format('Y-m-d'), $end->format('Y-m-d')])
+        ->get()
+        ->keyBy('date');
+
+    // Buat data absensi per hari
         $this->attendanceData = collect($dates)->map(function ($date) use ($attendances) {
             $record = $attendances[$date] ?? null;
+            $special = $this->specialDays[$date] ?? null;
 
             return [
                 'date' => $date,
                 'check_in' => $record->check_in ?? '-',
                 'check_out' => $record->check_out ?? '-',
                 'status' => $record->status ?? '-',
+                'special_day' => $special?->type ?? null,
+                'special_description' => $special?->description ?? null,
             ];
         })->toArray();
     }

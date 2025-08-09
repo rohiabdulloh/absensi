@@ -35,7 +35,14 @@
                     <td style="border: 1pt solid #000">{{ \Carbon\Carbon::parse($data['date'])->translatedFormat('l, d F Y') }}</td>
                     <td style="border: 1pt solid #000; text-align: center;">{{ $data['check_in'] }}</td>
                     <td style="border: 1pt solid #000; text-align: center;">{{ $data['check_out'] }}</td>
-                    <td style="border: 1pt solid #000; text-align: center;">{{ $data['status'] }}</td>
+                    <td style="border: 1pt solid #000; text-align: center;">
+                        @if (!empty($data['special_day']))
+                            {{ $data['special_day'] }}
+                        @else
+                            {{ $data['status'] }}
+                        @endif
+                    </td>
+
                 </tr>
             @endforeach
             </tbody>

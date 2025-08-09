@@ -10,6 +10,7 @@ use App\Livewire\Pages\User\UserPage;
 use App\Livewire\Pages\Setting\SettingPage;
 use App\Livewire\Pages\Setting\LogoPage;
 use App\Livewire\Pages\Classroom\ClassroomPage;
+use App\Livewire\Pages\SpecialDay\SpecialDayPage;
 use App\Livewire\Pages\Period\PeriodPage;
 
 use App\Livewire\Pages\Student\StudentPage;
@@ -44,6 +45,7 @@ Route::middleware(['auth','role:superadmin'])->prefix('/admin')->group(function(
     Route::get('/user', UserPage::class)->name('user');
     Route::get('/kelas', ClassroomPage::class)->name('classroom');
     Route::get('/tahun-ajaran', PeriodPage::class)->name('period');
+    Route::get('/spesial', SpecialDayPage::class)->name('special');
     Route::get('/logo', LogoPage::class)->name('logo');
     Route::get('/pengaturan', SettingPage::class)->name('setting');
 

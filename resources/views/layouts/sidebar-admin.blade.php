@@ -85,6 +85,7 @@
             </x-slot>
             <x-menu-sub link="/admin/tahun-ajaran">Tahun Ajaran</x-menu-sub>
             <x-menu-sub link="/admin/kelas">Kelas</x-menu-sub>
+            <x-menu-sub link="/admin/spesial">Tanggal Spesial</x-menu-sub>
             <x-menu-sub link="/admin/pengaturan">Pengaturan Aplikasi</x-menu-sub>
             <x-menu-sub link="/admin/logo">Ubah Logo</x-menu-sub>
         </x-menu-dropdown>

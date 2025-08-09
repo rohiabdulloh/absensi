@@ -14,17 +14,29 @@
                 $rowClass = '';
                 if($dayOfWeek == \Carbon\Carbon::SATURDAY and $saturdayOff=='Y') $rowClass = 'bg-gray-100 dark:bg-gray-700';
                 if($dayOfWeek == \Carbon\Carbon::SUNDAY) $rowClass = 'bg-gray-100 dark:bg-gray-700';
+                if (!empty($item['special_day'])) {
+                    $rowClass = 'bg-gray-100 dark:bg-gray-700';
+                }
             @endphp
             <tr class="{{ $rowClass }}">
                 <td class="px-6 py-4">{{ \Carbon\Carbon::parse($item['date'])->translatedFormat('l, d F Y') }}</td>
                 <td class="px-6 py-4">{{ $item['check_in'] }}</td>
                 <td class="px-6 py-4">{{ $item['check_out'] }}</td>
                 <td class="px-6 py-4 text-center">
-                    @if($item['status'] == 'H') <span class="text-green-500 font-bold">{{ $item['status'] }}</span>
-                    @elseif($item['status'] == 'S' or $item['status'] == 'I') <span class="text-purple-500 font-bold">{{ $item['status'] }}</span>
-                    @elseif($item['status'] == 'A') <span class="text-red-500 font-bold">{{ $item['status'] }}</span>
-                    @elseif($item['status'] != '-') <span class="text-orange-500 font-bold">{{ $item['status'] }}</span>
-                    @else {{ $item['status'] }}
+                    @if (!empty($item['special_day']))
+                        <span
+                            class="text-red-500 font-bold cursor-default"
+                            title="{{ $item['special_description'] ?? '' }}">
+                            {{ $item['special_day'] }}
+                        </span>
+                    @else
+                        @if($item['status'] == 'H') <span class="text-gray-500 font-bold">{{ $item['status'] }}</span>
+                        @elseif($item['status'] == 'I') <span class="text-purple-500 font-bold">{{ $item['status'] }}</span>
+                        @elseif($item['status'] == 'S') <span class="text-green-500 font-bold">{{ $item['status'] }}</span>
+                        @elseif($item['status'] == 'A') <span class="text-red-500 font-bold">{{ $item['status'] }}</span>
+                        @elseif($item['status'] != '-') <span class="text-orange-500 font-bold">{{ $item['status'] }}</span>
+                        @else {{ $item['status'] }}
+                        @endif
                     @endif
                 </td>
             </tr>
