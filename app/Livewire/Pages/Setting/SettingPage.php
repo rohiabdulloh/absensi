@@ -23,6 +23,9 @@ class SettingPage extends Component
     public $absen_longitude;
     public $absen_radius;
     public $absen_location;
+    
+    public $button_activator = 1;
+    public $present_method = 1;
 
     protected $settingKeys = [
         'checkin_time',
@@ -38,6 +41,8 @@ class SettingPage extends Component
         'absen_longitude',
         'absen_radius',
         'absen_location',
+        'button_activator',   
+        'present_method', 
     ];
 
     protected $rules = [
@@ -50,6 +55,8 @@ class SettingPage extends Component
         'absen_latitude' => 'required|numeric',
         'absen_longitude' => 'required|numeric',
         'absen_radius' => 'required|integer|min:10',
+        'button_activator' => 'required|in:0,1,2',  
+        'present_method' => 'required|in:0,1,2', 
     ];
 
     public function mount()

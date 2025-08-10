@@ -22,6 +22,9 @@ class SettingSeeder extends Seeder
             ['key' => 'wa_message', 'value' => ''],
             ['key' => 'wa_apikey', 'value' => ''],
             ['key' => 'wa_secretkey', 'value' => ''],
+
+            ['key' => 'button_activator', 'value' => '1'],
+            ['key' => 'present_method', 'value' => '1'],
             
             ['key' => 'absen_latitude', 'value' => '-6.200000'],
             ['key' => 'absen_longitude', 'value' => '106.816666'],

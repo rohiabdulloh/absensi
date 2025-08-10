@@ -96,10 +96,28 @@
                 </div>
             </div>
 
-            <!-- Lokasi Presensi -->
+            <div class="col-span-2 mt-8 space-y-4">
+                <h3 class="text-xl font-semibold">Metode Presensi</h3>
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <x-select inline="false" label="Menampilkan Tombol Absen" model="button_activator">
+                        <option value="0">Selalu Tampil</option>
+                        <option value="1">Deteksi Lokasi</option>
+                        <option value="2">Deteksi Jaringan (Lokal/Publik)</option>
+                    </x-select>
+                    <x-select inline="false" label="Metode Absen" model="present_method">
+                        <option value="0">Tombol Saja</option>
+                        <option value="1">Foto Selfi</option>
+                        <option value="2">QR Code</option>
+                    </x-select>
+                </div>
+            </div>
+
+            @if($button_activator == 1)
+            <!-- Lokasi Presensi -->             
             <div class="col-span-2 mt-4 space-y-4">
                 <h3 class="text-xl font-semibold">Lokasi Presensi</h3>
 
+                <div x-ref="map" class="w-full h-64 rounded-lg border" wire:ignore></div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <x-input inline="false" label="Latitude" model="absen_latitude" x-model="lat" type="text" />
                     <x-input inline="false" label="Longitude" model="absen_longitude"  x-model="lng" type="text" />
@@ -109,8 +127,8 @@
                     <x-input inline="false" label="Nama Lokasi" model="absen_location" x-model="locationName" />
                 </div>
 
-                <div x-ref="map" class="w-full h-64 rounded-lg border" wire:ignore></div>
             </div>
+            @endif
 
         <x-alert/>
         

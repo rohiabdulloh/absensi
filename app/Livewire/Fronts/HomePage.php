@@ -27,7 +27,15 @@ class HomePage extends Component
     public $checkout_start;
     public $checkout_end;
 
-    public $isLocal = false;
+    public $activator;
+    public $isActive = false;
+    public $presentScreen = 0;
+    public $longitude;
+    public $latitude;
+    public $userLatitude;
+    public $userLongitude;
+
+    public $isLoading = true;
 
     public function mount()
     {
@@ -38,7 +46,17 @@ class HomePage extends Component
         $this->checkout_start = Carbon::createFromFormat('H:i', Setting::getValue('checkout_start'))->format('H:i:s');
         $this->checkout_end = Carbon::createFromFormat('H:i', Setting::getValue('checkout_end'))->format('H:i:s');
 
-        $this->isLocal = $this->isLocalNetwork();
+        $this->longitude = Setting::getValue('absen_longitude');
+        $this->latitude = Setting::getValue('absen_latitude');
+        $activator = Setting::getValue('button_activator');
+        if($activator == 2){
+            $this->isActive = $this->isLocalNetwork();
+        }elseif($activator == 1){
+            $this->activator = 1;
+        }else{            
+            $this->isActive = true;
+        }
+        
     }
 
     public function render()
@@ -87,6 +105,15 @@ class HomePage extends Component
 
     public function checkIn()
     {
+        $method = Setting::getValue('present_method');
+        
+        if($method==1) $this->presentScreen = 1;
+        elseif($method==2) $this->presentScreen = 2;
+        else $this->approveCheckIn();
+    }
+
+    public function approveCheckIn()
+    {
         $student = Student::where('user_id', Auth::user()->id)->first();
         if (!$student) return;
 
@@ -114,7 +141,10 @@ class HomePage extends Component
     }
 
     public function checkOut(){
-        $this->dispatch('open-confirm');
+        $method = Setting::getValue('present_method');
+        if($method==1) $this->presentScreen = 1;
+        elseif($method==2) $this->presentScreen = 2;
+        else $this->dispatch('open-confirm');
     }
 
     public function confirm()
@@ -127,8 +157,6 @@ class HomePage extends Component
 
         $attendance = Attendance::where('student_id', $student->id)->where('date', $today)->first();
 
-        
-        
         if ($attendance) {
             $attendance->check_out = $now->format('H:i:s');
             $attendance->save();
@@ -151,5 +179,46 @@ class HomePage extends Component
     public function setYear(){
         $activePeriod = Period::where('is_active', 'Y')->first();
         $this->year = $activePeriod ? $activePeriod->year_start : date('Y');
+    }
+
+    public function updatedUserLatitude()
+    {
+        if($this->activator == 1) $this->checkLocation();
+    }
+
+    public function updatedUserLongitude()
+    {
+        if($this->activator == 1) $this->checkLocation();
+    }
+
+    public function checkLocation()
+    {
+        if ($this->userLatitude && $this->userLongitude) {
+            $distance = $this->calculateDistance(
+                $this->latitude,
+                $this->longitude,
+                $this->userLatitude,
+                $this->userLongitude
+            );
+
+            $radius = Setting::getValue('absen_radius') ?? 50; 
+            $this->isActive = $distance <= $radius;
+            $this->isLoading = false;
+        }
+    }
+
+    public function calculateDistance($lat1, $lon1, $lat2, $lon2)
+    {
+        $earthRadius = 6371000; // in meters
+        $lat1 = deg2rad($lat1);
+        $lat2 = deg2rad($lat2);
+        $deltaLat = deg2rad($lat2 - $lat1);
+        $deltaLon = deg2rad($lon2 - $lon1);
+
+        $a = sin($deltaLat / 2) * sin($deltaLat / 2) +
+             cos($lat1) * cos($lat2) *
+             sin($deltaLon / 2) * sin($deltaLon / 2);
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        return $earthRadius * $c;
     }
 }
