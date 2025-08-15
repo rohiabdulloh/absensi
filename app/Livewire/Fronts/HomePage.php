@@ -107,12 +107,12 @@ class HomePage extends Component
     {
         $method = Setting::getValue('present_method');
         
-        if($method==1) $this->presentScreen = 1;
-        elseif($method==2) $this->presentScreen = 2;
-        else $this->approveCheckIn();
+        if($method==1) return $this->redirect('/siswa/selfie/checkin', navigate:true);
+        elseif($method==2) return $this->redirect('/siswa/selfie/checkin', navigate:true);
+        else $this->handleCheckIn(null, $this->year);
     }
 
-    public function approveCheckIn()
+    public static function handleCheckIn($filename, $year)
     {
         $student = Student::where('user_id', Auth::user()->id)->first();
         if (!$student) return;
@@ -134,20 +134,25 @@ class HomePage extends Component
             'check_in'   => $now->format('H:i:s'),
             'check_out'  => null,
             'status'     => $status,
-            'year'       => $this->year,
+            'year'       => $year,
+            'image_in'       => $filename,
         ]);
-
-        $this->dispatch('show-message', msg:'Presensi masuk berhasil disimpan'); 
     }
 
     public function checkOut(){
         $method = Setting::getValue('present_method');
-        if($method==1) $this->presentScreen = 1;
-        elseif($method==2) $this->presentScreen = 2;
+        if($method==1) return $this->redirect('/siswa/selfie/checkout', navigate:true);
+        elseif($method==2) return $this->redirect('/siswa/selfie/checkout', navigate:true);
         else $this->dispatch('open-confirm');
     }
 
+
     public function confirm()
+    {
+        $this->handleCheckout(null, $this->year);
+    }
+
+    public static function handleCheckout($filename, $year)
     {
         $student = Student::where('user_id', Auth::user()->id)->first();
         if (!$student) return;
@@ -159,6 +164,7 @@ class HomePage extends Component
 
         if ($attendance) {
             $attendance->check_out = $now->format('H:i:s');
+            $attendance->image_out = $filename;
             $attendance->save();
         } else {
             // Belum ada record presensi sama sekali hari ini, tetap buat record baru dengan status TAM
@@ -168,12 +174,12 @@ class HomePage extends Component
                 'check_in'   => null,
                 'check_out'  => $now->format('H:i:s'),
                 'status'     => 'TAM',
-                'year'       => $this->year,
+                'year'       => $year,
+                'image_out'  => $filename,
             ]);
 
         }
-            
-        $this->dispatch('show-message', msg:'Presensi pulang berhasil disimpan'); 
+        
     }
 
     public function setYear(){

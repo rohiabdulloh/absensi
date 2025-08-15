@@ -1,9 +1,9 @@
 <!-- Versi mobile (tampil hanya di layar kecil) -->
-<div class="block md:hidden space-y-6">
+<div class="mt-6 block md:hidden space-y-6">
     @foreach ($attendanceData as $item)
         @php
             $dayOfWeek = \Carbon\Carbon::parse($item['date'])->dayOfWeek;
-            $rowClass = 'text-gray-800 dark:bg-gray-800';
+            $rowClass = 'bg-white dark:bg-gray-900';
             if($dayOfWeek == \Carbon\Carbon::SATURDAY and $saturdayOff=='Y') $rowClass = 'bg-gray-100 dark:bg-gray-700';
             if($dayOfWeek == \Carbon\Carbon::SUNDAY) $rowClass = 'bg-gray-100 dark:bg-gray-700';
             if (!empty($item['special_day'])) {
@@ -12,7 +12,7 @@
         @endphp
 
         <div class="p-6 rounded-lg shadow-md transition-all duration-300 ease-in-out hover:shadow-xl
-                    bg-white dark:text-gray-100 {{ $rowClass }}">
+                    text-gray-800 dark:text-gray-100 {{ $rowClass }}">
             
             <!-- Tanggal -->
             <div class="flex justify-between items-center border-b pb-4 mb-4 border-gray-200 dark:border-gray-600">

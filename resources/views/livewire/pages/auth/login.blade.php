@@ -46,7 +46,7 @@ new #[Layout('layouts.guest')] class extends Component
 
             <!-- Form -->
             <form wire:submit="login" class="space-y-4">
-                <!-- Email/NIS/NIP -->
+                <!-- Email -->
                 <x-input label="Email / NIS / NIP" model="form.email" inline="false" />
 
                 <!-- Password -->
@@ -60,7 +60,11 @@ new #[Layout('layouts.guest')] class extends Component
                 </label>
 
                 <!-- Submit -->
-                <x-button-primary type="submit" class="w-full mt-4">
+                <x-button-primary type="submit" class="w-full mt-4"                
+                    wire:loading.attr="disabled"
+                    wire:target="login"
+                >
+                    <x-fas-circle-notch wire:loading wire:target="login" class="w-4 h-4 mr-2 animate-spin"/>
                     Masuk
                 </x-button-primary>
             </form>

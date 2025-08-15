@@ -31,6 +31,7 @@ use App\Livewire\Pages\Report\ReportRecapPage;
 
 use App\Livewire\Fronts\ReportPage;
 use App\Livewire\Fronts\FrontLeavePage;
+use App\Livewire\Fronts\SelfiePage;
 
 use App\Livewire\Teachers\StudentAttendance;
 use App\Livewire\Teachers\ReportAttendance;
@@ -76,6 +77,7 @@ Route::middleware(['auth','role:guru'])->prefix('/guru')->group(function(){
 Route::middleware(['auth','role:siswa'])->prefix('/siswa')->group(function(){        
     Route::get('/rekap', ReportPage::class)->name('student.report');
     Route::get('/izin', FrontLeavePage::class)->name('student.leave');
+    Route::get('/selfie/{type}', SelfiePage::class)->name('student.selfie');
 });
 
 

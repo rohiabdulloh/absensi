@@ -1,6 +1,6 @@
 <!-- Versi mobile (tampil hanya di layar kecil) -->
 <div class="block md:hidden space-y-6">
-    @foreach ($leaves as $item)
+    @forelse ($leaves as $item)
         @php
             $leaveType = $item->type == 'S' ? 'Sakit' : 'Izin';
             $statusClass = '';
@@ -64,5 +64,14 @@
             </div>
             @endif
         </div>
-    @endforeach
+    @empty
+        <div class="p-6 rounded-lg shadow-md bg-white dark:bg-gray-800 dark:text-gray-100 text-center">
+        <p class="text-lg font-semibold text-gray-600 dark:text-gray-300">
+            Belum ada permohonan izin yang diajukan.
+        </p>
+        <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            Tekan tombol Buat Pengajuan untuk mengajukan izin tidak masuk.
+        </p>
+    </div>
+    @endforelse
 </div>

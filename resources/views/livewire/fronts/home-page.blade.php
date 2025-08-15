@@ -1,10 +1,7 @@
 <!-- resources/views/livewire/fronts/home-page.blade.php -->
-<div class="max-w-4xl mx-auto px-4 py-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-@if($presentScreen==1)
-    <livewire:fronts.face-scanner/>
-@elseif($presentScreen==2)
-    <livewire:fronts.qr-scanner/>
-@else
+<div class="flex flex-col justify-between max-w-4xl mx-auto px-4 py-8 bg-white dark:bg-gray-800 rounded-lg shadow-md"
+    style="min-height: calc(100vh - 180px);">
+
     <!-- Header Siswa -->
     <div class="text-center mb-6">
         <h2 class="text-3xl font-semibold text-gray-800 dark:text-white">
@@ -42,8 +39,9 @@
         </div>
     </div>
 
-    @include('livewire.fronts.present-button')
+    <div>
+        @include('livewire.fronts.present-button')
 
-    <x-confirm>Yakin akan melakukan presensi pulang?</x-confirm>
-@endif
+        <x-confirm>Yakin akan melakukan presensi pulang?</x-confirm>
+    </div>
 </div>

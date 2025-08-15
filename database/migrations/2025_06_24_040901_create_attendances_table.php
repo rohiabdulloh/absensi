@@ -21,6 +21,8 @@ return new class extends Migration
             $table->integer('year');
             $table->integer('leave_id')->nullable();
             $table->enum('msg_sent',['Y','N'])->nullable();
+            $table->string('image_in')->nullable();
+            $table->string('image_out')->nullable();
             $table->timestamps();
         });
     }
