@@ -6,7 +6,7 @@ use Livewire\WithFileUploads;
 use Carbon\Carbon;
 
 use App\Models\User;
-class LogoPage extends Component
+class SettingLogoPage extends Component
 {
     use WithFileUploads;
     
@@ -23,7 +23,7 @@ class LogoPage extends Component
 
     public function render()
     {
-        return view('livewire.pages.setting.logo-page')->layout('layouts.app');
+        return view('livewire.pages.setting.setting-logo-page')->layout('layouts.app');
     }
 
     public function save(){

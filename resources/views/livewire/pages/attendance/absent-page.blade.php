@@ -4,7 +4,7 @@
         <x-breadcrumbs-link current="true">Siswa Absen</x-breadcrumbs-link>
     </x-breadcrumbs>
 
-    <x-page-header> Data Siswa Absen
+    <x-page-header> Siswa Absen
         
         <x-slot:button>
             <x-button wireclick="sendMessage" color="green">

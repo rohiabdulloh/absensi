@@ -16,7 +16,7 @@
     <!-- Navigation -->
     <nav class="flex flex-col space-y-1 mt-4 px-3 overflow-y-auto h-[calc(100%-4rem)] pb-6">
         <!-- Item -->
-        <x-menu link="/dashboard" class="rounded hover:bg-blue-100 dark:hover:bg-gray-800 transition">
+        <x-menu link="/dashboard" class="rounded hover:bg-blue-100 dark:hover:bg-blue-900 transition">
             <div class="flex items-center space-x-3 px-3 py-2">
                 <x-fas-tachometer-alt class="w-4 h-4 text-blue-600" />
                 <span class="text-sm text-gray-800 dark:text-gray-200">Dashboard</span>
@@ -24,7 +24,7 @@
         </x-menu>
 
         <!-- Dropdown Item -->
-        <x-menu-dropdown class="rounded hover:bg-green-100 dark:hover:bg-gray-800 transition">
+        <x-menu-dropdown class="rounded hover:bg-green-100 dark:hover:bg-green-900 transition">
             <x-slot:label>
                 <div class="flex items-center space-x-3 px-3 py-2">
                     <x-fas-user-graduate class="w-4 h-4 text-green-600" />
@@ -36,7 +36,7 @@
         </x-menu-dropdown>
 
         <!-- Guru -->
-        <x-menu-dropdown class="rounded hover:bg-purple-100 dark:hover:bg-gray-800 transition">
+        <x-menu-dropdown class="rounded hover:bg-purple-100 dark:hover:bg-purple-900 transition">
             <x-slot:label>
                 <div class="flex items-center space-x-3 px-3 py-2">
                     <x-fas-user-tie class="w-4 h-4 text-purple-600" />
@@ -44,11 +44,11 @@
                 </div>
             </x-slot>
             <x-menu-sub link="/admin/guru">Data Guru</x-menu-sub>
-            <x-menu-sub link="/admin/wali_kelas">Data Wali Kelas</x-menu-sub>
+            <x-menu-sub link="/admin/wali_kelas">Wali Kelas</x-menu-sub>
         </x-menu-dropdown>
 
         <!-- Presensi -->
-        <x-menu-dropdown class="rounded hover:bg-red-100 dark:hover:bg-gray-800 transition">
+        <x-menu-dropdown class="rounded hover:bg-red-100 dark:hover:bg-red-900 transition">
             <x-slot:label>
                 <div class="flex items-center space-x-3 px-3 py-2">
                     <x-fas-clipboard-check class="w-4 h-4 text-red-600" />
@@ -56,12 +56,13 @@
                 </div>
             </x-slot>
             <x-menu-sub link="/admin/presensi">Data Presensi</x-menu-sub>
-            <x-menu-sub link="/admin/presensi/absen">Data Siswa Absen</x-menu-sub>
-            <x-menu-sub link="/admin/presensi/izin">Data Pengajuan Izin</x-menu-sub>
+            <x-menu-sub link="/admin/presensi/absen">Siswa Absen</x-menu-sub>
+            <x-menu-sub link="/admin/presensi/izin">Pengajuan Izin</x-menu-sub>
+            <x-menu-sub link="/admin/presensi/foto">Foto Presensi</x-menu-sub>
         </x-menu-dropdown>
 
         <!-- Laporan -->
-        <x-menu-dropdown class="rounded hover:bg-yellow-100 dark:hover:bg-gray-800 transition">
+        <x-menu-dropdown class="rounded hover:bg-yellow-100 dark:hover:bg-yellow-900 transition">
             <x-slot:label>
                 <div class="flex items-center space-x-3 px-3 py-2">
                     <x-fas-print class="w-4 h-4 text-yellow-600" />
@@ -76,18 +77,21 @@
         </x-menu-dropdown>
 
         <!-- Pengaturan -->
-        <x-menu-dropdown class="rounded hover:bg-gray-200 dark:hover:bg-gray-800 transition">
+        <x-menu-dropdown class="rounded hover:bg-rose-200 dark:hover:bg-rose-900 transition">
             <x-slot:label>
                 <div class="flex items-center space-x-3 px-3 py-2 ">
-                    <x-fas-cog class="w-4 h-4 text-gray-600" />
+                    <x-fas-cog class="w-4 h-4 text-rose-600" />
                     <span class="text-sm text-gray-800 dark:text-gray-200">Pengaturan</span>
                 </div>
             </x-slot>
             <x-menu-sub link="/admin/tahun-ajaran">Tahun Ajaran</x-menu-sub>
             <x-menu-sub link="/admin/kelas">Kelas</x-menu-sub>
             <x-menu-sub link="/admin/spesial">Tanggal Spesial</x-menu-sub>
-            <x-menu-sub link="/admin/pengaturan">Pengaturan Aplikasi</x-menu-sub>
-            <x-menu-sub link="/admin/logo">Ubah Logo</x-menu-sub>
+            <x-menu-sub link="/admin/setting_presensi">Waktu & Metode Presensi</x-menu-sub>
+            <x-menu-sub link="/admin/setting_lokasi">Lokasi Presensi</x-menu-sub>
+            <x-menu-sub link="/admin/setting_pesan">Pesan Whatsapp</x-menu-sub>
+            <x-menu-sub link="/admin/setting_media">Penghapusan Foto</x-menu-sub>
+            <x-menu-sub link="/admin/setting_logo">Ubah Logo</x-menu-sub>
         </x-menu-dropdown>
     </nav>
 </aside>

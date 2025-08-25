@@ -19,9 +19,13 @@ class SettingSeeder extends Seeder
             ['key' => 'checkout_end', 'value' => '16:00'],
             ['key' => 'saturday_off', 'value' => 'Y'],
 
-            ['key' => 'wa_message', 'value' => ''],
-            ['key' => 'wa_apikey', 'value' => ''],
-            ['key' => 'wa_secretkey', 'value' => ''],
+            ['key' => 'delete_image_on', 'value' => 'Y'],
+            ['key' => 'delete_image_limit', 'value' => '5'],
+            ['key' => 'delete_image_time', 'value' => '09:00'],
+
+            ['key' => 'wa_message', 'value' => '-'],
+            ['key' => 'wa_apikey', 'value' => '-'],
+            ['key' => 'wa_secretkey', 'value' => '-'],
 
             ['key' => 'button_activator', 'value' => '1'],
             ['key' => 'present_method', 'value' => '1'],

@@ -7,8 +7,12 @@ use App\Livewire\App\DashboardPage;
 use App\Livewire\Pages\User\UserProfile;
 use App\Livewire\Pages\User\UserPage;
 
-use App\Livewire\Pages\Setting\SettingPage;
-use App\Livewire\Pages\Setting\LogoPage;
+use App\Livewire\Pages\Setting\SettingAttendancePage;
+use App\Livewire\Pages\Setting\SettingLocationPage;
+use App\Livewire\Pages\Setting\SettingMessagePage;
+use App\Livewire\Pages\Setting\SettingMediaPage;
+use App\Livewire\Pages\Setting\SettingLogoPage;
+
 use App\Livewire\Pages\Classroom\ClassroomPage;
 use App\Livewire\Pages\SpecialDay\SpecialDayPage;
 use App\Livewire\Pages\Period\PeriodPage;
@@ -22,6 +26,7 @@ use App\Livewire\Pages\Teacher\TeacherClassPage;
 use App\Livewire\Pages\Attendance\AttendancePage;
 use App\Livewire\Pages\Attendance\AbsentPage;
 use App\Livewire\Pages\Attendance\LeavePage;
+use App\Livewire\Pages\Attendance\AttendanceMediaPage;
 
 use App\Livewire\Pages\Report\ReportPresentPage;
 use App\Livewire\Pages\Report\ReportPresentStudentPage;
@@ -47,8 +52,12 @@ Route::middleware(['auth','role:superadmin'])->prefix('/admin')->group(function(
     Route::get('/kelas', ClassroomPage::class)->name('classroom');
     Route::get('/tahun-ajaran', PeriodPage::class)->name('period');
     Route::get('/spesial', SpecialDayPage::class)->name('special');
-    Route::get('/logo', LogoPage::class)->name('logo');
-    Route::get('/pengaturan', SettingPage::class)->name('setting');
+
+    Route::get('/setting_logo', SettingLogoPage::class)->name('setting_logo');
+    Route::get('/setting_presensi', SettingAttendancePage::class)->name('setting_presensi');
+    Route::get('/setting_lokasi', SettingLocationPage::class)->name('setting_lokasi');
+    Route::get('/setting_pesan', SettingMessagePage::class)->name('setting_pesan');
+    Route::get('/setting_media', SettingMediaPage::class)->name('setting_media');
 
     Route::get('/siswa', StudentPage::class)->name('student');
     Route::get('/siswa_kelas', StudentClassPage::class)->name('student_class');
@@ -59,7 +68,7 @@ Route::middleware(['auth','role:superadmin'])->prefix('/admin')->group(function(
     Route::get('/presensi', AttendancePage::class)->name('attendance');
     Route::get('/presensi/absen', AbsentPage::class)->name('absent');
     Route::get('/presensi/izin', LeavePage::class)->name('leave');
-
+    Route::get('/presensi/foto', AttendanceMediaPage::class)->name('foto');
      
     Route::get('/laporan/presensi', ReportPresentPage::class)->name('report.present'); 
     Route::get('/laporan/presensi_siswa', ReportPresentStudentPage::class)->name('report.present_student'); 

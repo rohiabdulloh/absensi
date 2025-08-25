@@ -1,7 +1,7 @@
 <!-- Header -->
 <div class="py-2 px-4 h-16 sticky top-0 z-40 
     bg-gradient-to-r from-blue-50/80 via-white/80 to-blue-100/80 
-    dark:from-gray-900/80 dark:via-gray-800/80 dark:to-gray-900/80 
+    dark:from-blue-950/40 dark:via-gray-950/40 dark:to-blue-900/40 
     backdrop-blur-md border-b border-blue-100 dark:border-gray-700 
     shadow-md transition-all duration-300">
 

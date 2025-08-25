@@ -1,5 +1,5 @@
-@props(['label'=>'', 'model'=>'', 'inline'=>'true', 'live'=>'false'])
-<div class="{{$inline=='true' ? 'md:flex' : '' }}  justify-start" x-data x-init="
+@props(['label'=>'', 'labelautosize'=>'false',  'model'=>'', 'inline'=>'true', 'live'=>'false'])
+<div class="{{$inline=='true' ? 'md:flex' : '' }} items-center justify-start" x-data x-init="
   let pikaday = new Pikaday({ 
      field: $refs.input,  
      theme: isDark ? 'dark-theme' : 'null',
@@ -15,9 +15,15 @@
   })"
 >
    @if($label!='')
-   <div class="w-full {{$inline=='true' ? 'md:w-48' : '' }}">
-    <label>{!! str_replace("*","<span class='text-red-500'>*</span>",$label) !!}</label>
-   </div>
+      @if($labelautosize=='true')
+      <div class="mx-4">
+         <label>{!! str_replace("*","<span class='text-red-500'>*</span>",$label) !!}</label>
+      </div>
+      @else
+      <div class="w-full {{$inline=='true' ? 'md:w-48' : '' }}">
+         <label>{!! str_replace("*","<span class='text-red-500'>*</span>",$label) !!}</label>
+      </div>
+      @endif
    @endif
 
    <div class="flex-1">

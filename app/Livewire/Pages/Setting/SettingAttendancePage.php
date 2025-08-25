@@ -5,7 +5,7 @@ use Livewire\Component;
 use Carbon\Carbon;
 
 use App\Models\Setting;
-class SettingPage extends Component
+class SettingAttendancePage extends Component
 {
     
     public $checkin_time;
@@ -27,6 +27,10 @@ class SettingPage extends Component
     public $button_activator = 1;
     public $present_method = 1;
 
+    public $delete_image_on;
+    public $delete_image_limit;
+    public $delete_image_time;
+
     protected $settingKeys = [
         'checkin_time',
         'checkin_start',
@@ -43,6 +47,9 @@ class SettingPage extends Component
         'absen_location',
         'button_activator',   
         'present_method', 
+        'delete_image_on', 
+        'delete_image_limit', 
+        'delete_image_time', 
     ];
 
     protected $rules = [
@@ -68,7 +75,7 @@ class SettingPage extends Component
 
     public function render()
     {
-        return view('livewire.pages.setting.setting-page')->layout('layouts.app');
+        return view('livewire.pages.setting.setting-attendance-page')->layout('layouts.app');
     }
 
     public function save(){
