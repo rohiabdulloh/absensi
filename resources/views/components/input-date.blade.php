@@ -16,7 +16,7 @@
 >
    @if($label!='')
       @if($labelautosize=='true')
-      <div class="mx-4">
+      <div class="mr-4">
          <label>{!! str_replace("*","<span class='text-red-500'>*</span>",$label) !!}</label>
       </div>
       @else

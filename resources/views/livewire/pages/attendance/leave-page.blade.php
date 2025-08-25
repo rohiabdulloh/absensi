@@ -4,11 +4,7 @@
         <x-breadcrumbs-link current="true">Pengajuan Izin</x-breadcrumbs-link>
     </x-breadcrumbs>
 
-    <x-page-header> Pengajuan Izin
-        <x-slot:button>                   
-           
-        </x-slot>
-    </x-page-header>
+    <x-page-header> Pengajuan Izin</x-page-header>
 
     <x-card class="min-h-full">
 

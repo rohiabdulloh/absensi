@@ -5,16 +5,20 @@ namespace App\Livewire\Pages\Attendance;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-use App\Models\Attendance;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
+use App\Models\Attendance;
+use App\Models\Setting;
 class AttendanceMediaPage extends Component
 {
     use WithPagination;
 
     public $selectedDate;
     public $absentType;
+    public $idDelete;
+    public $deleteMessage;
+    public $canDelete = false;
 
     public function mount()
     {
@@ -25,61 +29,79 @@ class AttendanceMediaPage extends Component
     public function render()
     {
         return view('livewire.pages.attendance.attendance-media-page', [
-            'attendances' => $this->attendances,
+            'attendances' => $this->getAttendances()->paginate(12),
         ])->layout('layouts.app');
     }
 
-    public function getAttendancesProperty()
+    public function getAttendances()
     {
         if($this->absentType == 'checkin'){
-            return Attendance::query()
-                ->with('student')
-                ->where('created_at', $this->selectedDate)
+            return Attendance::with('student')
+                ->where('date', $this->selectedDate)
                 ->whereNotNull('image_in')
                 ->where('image_in', '!=', '')
-                ->orderBy('student_id')
-                ->paginate(12);
+                ->orderBy('student_id');
         }else{
-            return Attendance::query()
-                ->with('student')
-                ->where('created_at', $this->selectedDate)
+            return Attendance::with('student')
+                ->where('date', $this->selectedDate)
                 ->whereNotNull('image_out')
                 ->where('image_out', '!=', '')
-                ->orderBy('student_id')
-                ->paginate(12);
+                ->orderBy('student_id');
         }
+    }
+
+    public function openConfirm($id){
+        $this->idDelete = $id;
+        $this->deleteMessage = "Apakah yakin akan menghapus foto?";
+        $this->dispatch('open-confirm');
+    }
+
+    public function openConfirmAll(){
+        $this->deleteMessage = "Apakah yakin akan menghapus semua foto?";
+        $this->dispatch('open-confirm');
+    }
+
+    public function delete(){
+        if($this->idDelete) $this->deletePhoto($this->idDelete);
+        else $this->deleteAllPhoto();
     }
 
     public function deletePhoto($attendanceId)
     {
         $attendance = Attendance::find($attendanceId);
-        $photo = $this->absentType=='chekin' ? $attendance->image_in : $attendance->image_out;
+        $photo = $this->absentType=='checkin' ? $attendance->image_in : $attendance->image_out;
+        
         if ($attendance && $photo) {
-            if (Storage::disk('public')->exists($photo)) {
-                Storage::disk('public')->delete($photo);
+            if (Storage::disk('public')->exists('selfies/'.$photo)) {
+                Storage::disk('public')->delete('selfies/'.$photo);
             }
 
-            $attendance->photo = null;
+            if($this->absentType=='checkin') $attendance->image_in = null;
+            else $attendance->image_out = null;
             $attendance->save();
 
+            $this->idDelete = null;
             $this->dispatch('show-message', msg: 'Foto berhasil dihapus');
         }
     }
 
     public function deleteAllPhoto()
     {
-        $attendances = $this->attendances;
+        $attendances = $this->getAttendances()->get();
 
         $dataCount = 0;
         foreach($attendances as $attendance){
-            $photo = $this->absentType=='chekin' ? $attendance->image_in : $attendance->image_out;
+            $photo = $this->absentType=='checkin' ? $attendance->image_in : $attendance->image_out;
+            
             if ($attendance && $photo) {
-                if (Storage::disk('public')->exists($photo)) {
-                    Storage::disk('public')->delete($photo);
+                if (Storage::disk('public')->exists('selfies/'.$photo)) {
+                    Storage::disk('public')->delete('selfies/'.$photo);
+            
                     $dataCount++;
                 }
 
-                $attendance->photo = null;
+                if($this->absentType=='checkin') $attendance->image_in = null;
+                else $attendance->image_out = null;
                 $attendance->save();
             }
         }
@@ -93,4 +115,19 @@ class AttendanceMediaPage extends Component
         $this->absentType = 'checkin';
     }
 
+    public function updatedSelectedDate(){
+        $limit = Setting::getValue('delete_image_limit');
+
+        if (!$this->selectedDate || !$limit) {
+            $this->canDelete = false;
+            return;
+        }
+
+        $selectedDate = Carbon::parse($this->selectedDate);
+        $now = Carbon::now();
+
+        $diffInDays = $now->diffInDays($selectedDate, false);
+        
+        $this->canDelete = $diffInDays < -$limit;
+    }
 }

@@ -1,4 +1,4 @@
-<div x-data="">
+<div x-data="" x-on:open-confirm.window="isConfirmOpen = true">
     
 {{-- Menggunakan komponen backdrop --}}
 <x-backdrop show="isConfirmOpen" onclose="isConfirmOpen = false"/>
