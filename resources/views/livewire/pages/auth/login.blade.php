@@ -30,7 +30,7 @@ new #[Layout('layouts.guest')] class extends Component
 <div class="min-h-screen flex flex-col items-center justify-center px-4">
     <!-- Logo -->
     <div class="mb-6">
-        <img src="{{ asset('storage/setting/logo.png') }}" alt="Logo" class="w-48 mx-auto drop-shadow-md">
+        <img src="{{ asset('storage/setting/logo.png') }}" alt="Logo" class="w-80 mx-auto drop-shadow-md">
     </div>
 
     <!-- Card -->
@@ -47,7 +47,7 @@ new #[Layout('layouts.guest')] class extends Component
             <!-- Form -->
             <form wire:submit="login" class="space-y-4">
                 <!-- Email -->
-                <x-input label="Email / NIS / NIP" model="form.email" inline="false" />
+                <x-input label="Username/Email" model="form.email" inline="false" />
 
                 <!-- Password -->
                 <x-input type="password" label="Password" model="form.password" inline="false" />
@@ -74,6 +74,6 @@ new #[Layout('layouts.guest')] class extends Component
 
     <!-- Footer (optional) -->
     <div class="mt-6 text-sm text-gray-500 dark:text-gray-400">
-        &copy; {{ date('Y') }} Sekolah Anda. Semua hak dilindungi.
+        &copy; {{ date('Y') }} SMAN 1 Kencong. Semua hak dilindungi.
     </div>
 </div>
